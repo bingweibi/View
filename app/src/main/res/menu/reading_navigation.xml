@@ -3,17 +3,41 @@
 
     <item
         android:id="@+id/navigation_zhihu"
+        android:textSize="16sp"
+        android:textColor="#fff"
+        android:orderInCategory="0"
+        android:icon="@drawable/point1"
         android:title="@string/zhihu"/>
 
     <item
         android:id="@+id/navigation_android"
+        android:textSize="16sp"
+        android:textColor="#fff"
+        android:icon="@drawable/point2"
+        android:orderInCategory="1"
         android:title="@string/android"/>
 
     <item
         android:id="@+id/navigation_IOS"
+        android:textSize="16sp"
+        android:textColor="#fff"
+        android:orderInCategory="2"
+        android:icon="@drawable/point3"
         android:title="@string/ios"/>
 
     <item
         android:id="@+id/navigation_front"
+        android:textSize="16sp"
+        android:textColor="#fff"
+        android:orderInCategory="3"
+        android:icon="@drawable/point4"
         android:title="@string/front"/>
+
+    <item
+        android:id="@+id/navigation_joker"
+        android:textSize="16sp"
+        android:textColor="#fff"
+        android:orderInCategory="4"
+        android:icon="@drawable/point5"
+        android:title="@string/joker"/>
 </menu>

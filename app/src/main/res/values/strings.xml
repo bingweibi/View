@@ -15,4 +15,10 @@
     <string name="music_fragment">music_fragment</string>
     <string name="reading_fragment">reading_fragment</string>
     <string name="video_fragment">video_fragment</string>
+    <string name="zhihu_fragment">zhihu_fragment</string>
+    <string name="android_fragment">android_fragment</string>
+    <string name="ios_fragment">ios_fragment</string>
+    <string name="front_fragment">front_fragment</string>
+    <string name="joker_fragment">joker_fragment</string>
+    <string name="joker">段子</string>
 </resources>
