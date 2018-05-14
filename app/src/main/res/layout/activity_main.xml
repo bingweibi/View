@@ -7,7 +7,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:fitsSystemWindows="true">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/title_reading"
+        android:gravity="center"
+        android:textSize="25sp"
+        android:textColor="#fff"
+        android:background="@color/colorPrimaryDark" />
 
     <com.example.bibingwei.view.view.NoScrollViewPager
         android:id="@+id/fragment_container"

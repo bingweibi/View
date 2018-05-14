@@ -1,5 +1,7 @@
 package com.example.bibingwei.view;
 
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -8,11 +10,14 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 import com.example.bibingwei.view.fragments.luck_fragment;
 import com.example.bibingwei.view.fragments.music_fragment;
 import com.example.bibingwei.view.fragments.reading_fragment;
 import com.example.bibingwei.view.fragments.video_fragment;
+import com.githang.statusbar.StatusBarCompat;
 
 /**
  * @author bibingwei
@@ -22,12 +27,15 @@ public class MainActivity extends AppCompatActivity {
     private ViewPager mViewPager;
     private Fragment readingFragment,luckFragment,musicFragment,videoFragment;
     private BottomNavigationView navigation;
+    private TextView titleView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        StatusBarCompat.setStatusBarColor(this, Color.parseColor("#3F51B5"));
+        titleView = findViewById(R.id.title);
         mViewPager = findViewById(R.id.fragment_container);
         mViewPager.addOnPageChangeListener(mOnPageChangeListener);
         navigation = findViewById(R.id.navigation);
@@ -77,6 +85,7 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public void onPageSelected(int position) {
+            titleView.setText(navigation.getMenu().getItem(position).getTitle());
             navigation.getMenu().getItem(position).setChecked(true);
         }
 
