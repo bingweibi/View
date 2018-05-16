@@ -23,16 +23,38 @@ public class ZhihuAdapter extends RecyclerView.Adapter<ZhihuAdapter.ViewHolder> 
 
     private List<ZhiHu.StoriesBean> mZhiHuArrayList;
     private Context mContext;
+    private OnItemClickListener clickListener;
 
-    static class ViewHolder extends RecyclerView.ViewHolder {
+    public interface OnItemClickListener{
+        /**
+         * 点击item
+         * @param view
+         * @param position
+         */
+        void onClick(View view,int position);
+    }
+
+    public void setClickListener(OnItemClickListener clickListener){
+        this.clickListener = clickListener;
+    }
+
+    class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         private ImageView zhihuImage;
         private TextView zhihuText;
 
-        ViewHolder(View itemView) {
+        public ViewHolder(View itemView) {
             super(itemView);
             zhihuImage = itemView.findViewById(R.id.zhihuListImageItem);
             zhihuText = itemView.findViewById(R.id.zhihuListTextItem);
+        }
+
+
+        @Override
+        public void onClick(View v) {
+            if (clickListener != null) {
+                clickListener.onClick(itemView, getAdapterPosition());
+            }
         }
     }
 
@@ -58,4 +80,5 @@ public class ZhihuAdapter extends RecyclerView.Adapter<ZhihuAdapter.ViewHolder> 
     public int getItemCount() {
         return mZhiHuArrayList.size();
     }
+
 }

@@ -1,10 +1,11 @@
 package com.example.bibingwei.view.fragments;
 
 
-import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -13,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.bibingwei.view.R;
+import com.example.bibingwei.view.activity.ZhihuDailyDetail;
 import com.example.bibingwei.view.adapter.ZhihuAdapter;
 import com.example.bibingwei.view.api.ZhihuApi;
 import com.example.bibingwei.view.bean.ZhiHu;
@@ -34,6 +36,7 @@ public class zhihu_fragment extends Fragment {
     private RecyclerView mRecyclerView;
     private ZhihuAdapter mZhihuAdapter;
     private List<ZhiHu.StoriesBean> mZhiHuList;
+    private SwipeRefreshLayout mSwipeRefreshLayout;
 
     public static zhihu_fragment newInstance() {
 
@@ -54,17 +57,39 @@ public class zhihu_fragment extends Fragment {
                              Bundle savedInstanceState) {
         View mView = inflater.inflate(R.layout.fragment_zhihu_fragment, container, false);
         mRecyclerView = mView.findViewById(R.id.zhiHu_fragment_recyclerView);
+        mZhiHuList = new ArrayList<>();
+        mSwipeRefreshLayout = mView.findViewById(R.id.zhihuSwipeRefreshLayout);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(linearLayoutManager);
+        mZhihuAdapter = new ZhihuAdapter(mZhiHuList);
+        initData();
         return mView;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        initData();
+
+        if (mZhiHuList.size()>0){
+            mSwipeRefreshLayout.setRefreshing(false);
+        }else {
+            mSwipeRefreshLayout.setRefreshing(true);
+        }
+        mZhihuAdapter.setClickListener(new ZhihuAdapter.OnItemClickListener() {
+            @Override
+            public void onClick(View view, int position) {
+                Intent intent = new Intent(getContext(),ZhihuDailyDetail.class);
+                intent.putExtra("storiesId",mZhiHuList.get(position).getId());
+                startActivity(intent);
+            }
+        });
     }
 
     private void initData() {
@@ -85,8 +110,9 @@ public class zhihu_fragment extends Fragment {
 
             @Override
             public void onFailure(Call<ZhiHu> call, Throwable t) {
-                Toast.makeText(getContext(),"抱歉,网络好像不给力！",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(),"抱歉,网络好像不给力!",Toast.LENGTH_SHORT).show();
             }
         });
     }
+
 }

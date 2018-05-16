@@ -7,7 +7,7 @@ import retrofit2.http.GET;
 
 /**
  * @author bibingwei
- * ttp://news-at.zhihu.com/api/4/news/latest
+ * http://news-at.zhihu.com/api/4/news/latest
  */
 public interface ZhihuApi {
 
