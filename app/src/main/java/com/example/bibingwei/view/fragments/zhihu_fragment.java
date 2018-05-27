@@ -82,7 +82,7 @@ public class zhihu_fragment extends Fragment {
         }else {
             mSwipeRefreshLayout.setRefreshing(true);
         }
-        mZhihuAdapter.setClickListener(new ZhihuAdapter.OnItemClickListener() {
+        mZhihuAdapter.setOnItemClickListener(new ZhihuAdapter.MyItemClickListener () {
             @Override
             public void onClick(View view, int position) {
                 Intent intent = new Intent(getContext(),ZhihuDailyDetail.class);

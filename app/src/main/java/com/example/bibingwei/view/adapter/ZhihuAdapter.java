@@ -13,7 +13,6 @@ import com.bumptech.glide.Glide;
 import com.example.bibingwei.view.R;
 import com.example.bibingwei.view.bean.ZhiHu;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -23,9 +22,13 @@ public class ZhihuAdapter extends RecyclerView.Adapter<ZhihuAdapter.ViewHolder> 
 
     private List<ZhiHu.StoriesBean> mZhiHuArrayList;
     private Context mContext;
-    private OnItemClickListener clickListener;
+    private MyItemClickListener  mMyItemClickListener;
 
-    public interface OnItemClickListener{
+    public void setOnItemClickListener(MyItemClickListener  clickListener){
+        this.mMyItemClickListener = clickListener;
+    }
+
+    public interface MyItemClickListener {
         /**
          * 点击item
          * @param view
@@ -34,31 +37,30 @@ public class ZhihuAdapter extends RecyclerView.Adapter<ZhihuAdapter.ViewHolder> 
         void onClick(View view,int position);
     }
 
-    public void setClickListener(OnItemClickListener clickListener){
-        this.clickListener = clickListener;
-    }
-
     class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         private ImageView zhihuImage;
         private TextView zhihuText;
+        View zhihuItem;
 
         public ViewHolder(View itemView) {
             super(itemView);
+            zhihuItem = itemView;
             zhihuImage = itemView.findViewById(R.id.zhihuListImageItem);
             zhihuText = itemView.findViewById(R.id.zhihuListTextItem);
+            itemView.setOnClickListener(this);
         }
-
 
         @Override
         public void onClick(View v) {
-            if (clickListener != null) {
-                clickListener.onClick(itemView, getAdapterPosition());
+            if (mMyItemClickListener != null) {
+                mMyItemClickListener.onClick(itemView, getAdapterPosition());
             }
         }
     }
 
-    public ZhihuAdapter(List<ZhiHu.StoriesBean> zhiHuArrayList) {
+    public ZhihuAdapter(Context context,List<ZhiHu.StoriesBean> zhiHuArrayList) {
+        mContext = context;
         mZhiHuArrayList = zhiHuArrayList;
     }
 
@@ -71,7 +73,7 @@ public class ZhihuAdapter extends RecyclerView.Adapter<ZhihuAdapter.ViewHolder> 
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
         Glide.with(mContext).load(mZhiHuArrayList.get(position).getImages().get(0)).into(holder.zhihuImage);
         holder.zhihuText.setText(mZhiHuArrayList.get(position).getTitle());
     }
