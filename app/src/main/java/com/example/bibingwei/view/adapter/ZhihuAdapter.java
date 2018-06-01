@@ -18,23 +18,24 @@ import java.util.List;
 /**
  * @author bibingwei
  */
-public class ZhihuAdapter extends RecyclerView.Adapter<ZhihuAdapter.ViewHolder> {
+public class ZhihuAdapter extends RecyclerView.Adapter<ZhihuAdapter.ViewHolder>{
 
     private List<ZhiHu.StoriesBean> mZhiHuArrayList;
     private Context mContext;
-    private MyItemClickListener  mMyItemClickListener;
 
-    public void setOnItemClickListener(MyItemClickListener  clickListener){
-        this.mMyItemClickListener = clickListener;
-    }
-
-    public interface MyItemClickListener {
+    public interface OnItemClickListener {
         /**
          * 点击item
          * @param view
          * @param position
          */
-        void onClick(View view,int position);
+        void onItemClick(View view, int position);
+    }
+
+    private OnItemClickListener clickListener;
+
+    public void setOnItemClickListener(OnItemClickListener clickListener){
+        this.clickListener = clickListener;
     }
 
     class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
@@ -53,8 +54,8 @@ public class ZhihuAdapter extends RecyclerView.Adapter<ZhihuAdapter.ViewHolder> 
 
         @Override
         public void onClick(View v) {
-            if (mMyItemClickListener != null) {
-                mMyItemClickListener.onClick(itemView, getAdapterPosition());
+            if (clickListener != null) {
+                clickListener.onItemClick(itemView, getAdapterPosition());
             }
         }
     }
@@ -64,23 +65,34 @@ public class ZhihuAdapter extends RecyclerView.Adapter<ZhihuAdapter.ViewHolder> 
         mZhiHuArrayList = zhiHuArrayList;
     }
 
+    public ZhihuAdapter() {
+    }
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.zhihulistitem,parent,false);
-        mContext = parent.getContext();
-        return new ViewHolder(view);
+        final ViewHolder holder = new ViewHolder(view);
+        return holder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
         Glide.with(mContext).load(mZhiHuArrayList.get(position).getImages().get(0)).into(holder.zhihuImage);
         holder.zhihuText.setText(mZhiHuArrayList.get(position).getTitle());
+        if (clickListener != null){
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    clickListener.onItemClick(holder.itemView,position);
+                }
+            });
+        }
     }
+
 
     @Override
     public int getItemCount() {
-        return mZhiHuArrayList.size();
+        return mZhiHuArrayList == null ? 0 : mZhiHuArrayList.size();
     }
-
 }

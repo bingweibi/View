@@ -1,4 +1,4 @@
-package com.example.bibingwei.view.api;
+package com.example.bibingwei.view.network.api;
 
 import com.example.bibingwei.view.bean.ZhiHuDetail;
 
