@@ -8,15 +8,15 @@ import java.util.List;
  */
 public class ZhiHu {
 
+
     /**
-     * date : 20180514
-     * stories : [{"images":["https://pic3.zhimg.com/v2-d0c6d4b8cbd49ea6bd64553b223d8e5e.jpg"],"type":0,"id":9682758,"ga_prefix":"051419","title":"DNF 「3 年封号」有冤案？这群「土豪」想打个官司验证一下"},{"images":["https://pic3.zhimg.com/v2-048b5596c3fa3383475a351c03b406da.jpg"],"type":0,"id":9682611,"ga_prefix":"051419","title":"每天睡觉前，一边恨自己，一边往嘴里塞东西"},{"images":["https://pic2.zhimg.com/v2-6f35c6559fe1a680b73a12f72e120f59.jpg"],"type":0,"id":9681522,"ga_prefix":"051418","title":"说不租就不租，说赶人就赶人，房东有这么大权利吗？"},{"images":["https://pic1.zhimg.com/v2-9445099d057ba6ff93027b77758caa8c.jpg"],"type":0,"id":9682607,"ga_prefix":"051417","title":"两种人更容易手机上瘾：不愿手闲着，害怕被落下"},{"images":["https://pic1.zhimg.com/v2-9b425affd176721457a58461bb68dfb4.jpg"],"type":0,"id":9682546,"ga_prefix":"051416","title":"撕掉「亏损」标签，京东也丢掉了「增长」"},{"title":"《复联 3》的画面看起来那么紫，真不是我灭霸的锅","ga_prefix":"051414","images":["https://pic1.zhimg.com/v2-c2536ea5a449cb8d514c759ede07a20c.jpg"],"multipic":true,"type":0,"id":9682512},{"images":["https://pic2.zhimg.com/v2-00b4f0314470212f6550f367bb724679.jpg"],"type":0,"id":9682515,"ga_prefix":"051412","title":"被「悬赏」的顺风车司机刘振华"},{"images":["https://pic1.zhimg.com/v2-df5b339c830b5b95e74c80fc411a188c.jpg"],"type":0,"id":9682489,"ga_prefix":"051412","title":"大误 · 灭霸老爹的不归之路（有剧透）"},{"images":["https://pic1.zhimg.com/v2-6e94b422f748674e0660e69480bf777c.jpg"],"type":0,"id":9682562,"ga_prefix":"051410","title":"拔牙时感到疼痛，千万别忍着"},{"images":["https://pic1.zhimg.com/v2-87157c8cabae92d36a6eb8c14045fe78.jpg"],"type":0,"id":9682193,"ga_prefix":"051409","title":"万一你以后有了自己的家，装修时千万别和我犯同样的错误"},{"images":["https://pic3.zhimg.com/v2-910312326beb3651e729b8a0f213aaee.jpg"],"type":0,"id":9682012,"ga_prefix":"051408","title":"摩拜被收购后，回头再看它的诞生成长，活脱脱一部启示录"},{"title":"你所爱的表情包们已经老了","ga_prefix":"051407","images":["https://pic3.zhimg.com/v2-c06bf02582b22e10b4fc2936d6055992.jpg"],"multipic":true,"type":0,"id":9682257},{"images":["https://pic3.zhimg.com/v2-9c01eeb776cd5e1ed85186be1504d38a.jpg"],"type":0,"id":9682399,"ga_prefix":"051407","title":"错一次损失几百万，一个容错率几乎为零的职业"},{"images":["https://pic2.zhimg.com/v2-b0e80f207e29d099c11410a939ab37d5.jpg"],"type":0,"id":9682522,"ga_prefix":"051406","title":"瞎扯 · 如何正确地吐槽"}]
-     * top_stories : [{"image":"https://pic2.zhimg.com/v2-6ed49ec115e57fa2572cb44a84baa87d.jpg","type":0,"id":9682546,"ga_prefix":"051416","title":"撕掉「亏损」标签，京东也丢掉了「增长」"},{"image":"https://pic2.zhimg.com/v2-767fefc0a100dfdd9a5b9995b1bb8c55.jpg","type":0,"id":9682611,"ga_prefix":"051419","title":"每天睡觉前，一边恨自己，一边往嘴里塞东西"},{"image":"https://pic4.zhimg.com/v2-9ad23516c8714c58b4a522fa0dd37ebf.jpg","type":0,"id":9682607,"ga_prefix":"051417","title":"两种人更容易手机上瘾：不愿手闲着，害怕被落下"},{"image":"https://pic2.zhimg.com/v2-ed5ebb65cbadaab28e4aa253dbdabfe9.jpg","type":0,"id":9682512,"ga_prefix":"051414","title":"《复联 3》的画面看起来那么紫，真不是我灭霸的锅"},{"image":"https://pic2.zhimg.com/v2-6123abf6eb806373d0ff0540d219bff5.jpg","type":0,"id":9682515,"ga_prefix":"051412","title":"被「悬赏」的顺风车司机刘振华"}]
+     * date : 20180603
+     * stories : [{"title":"虾籽鲜、虾仁弹、虾黄香，这份鲜香三虾面，一年只卖一季","ga_prefix":"060310","images":["https://pic1.zhimg.com/v2-49ffff254ef991db20e9569c03d8cc38.jpg"],"multipic":true,"type":0,"id":9684593},{"images":["https://pic1.zhimg.com/v2-95c0d4599d021d4032af38a404d31278.jpg"],"type":0,"id":9685149,"ga_prefix":"060309","title":"苹果又要开新品发布会，我来大胆预测一下\u2026\u2026"},{"images":["https://pic3.zhimg.com/v2-b1f64ebdfa336fa35a8d9b9d3d5acdf2.jpg"],"type":0,"id":9685215,"ga_prefix":"060309","title":"本周热门精选 · 世界真奇妙"},{"images":["https://pic3.zhimg.com/v2-085bf1a4b2ab2cba10356032664aa07e.jpg"],"type":0,"id":9684422,"ga_prefix":"060308","title":"生物学中有哪些好玩的知识？"},{"images":["https://pic3.zhimg.com/v2-2e0c6cc363a964eb1d4c1f77efbfbb5a.jpg"],"type":0,"id":9683645,"ga_prefix":"060307","title":"好端端的，可有些人就这么活成了喷子"},{"title":"稀有视角、工业精神，细节能力、科学情怀：为什么人们沉迷于《异星工厂》？","ga_prefix":"060307","images":["https://pic1.zhimg.com/v2-a1a25dcabb7c3df1b05798812c94cfe4.jpg"],"multipic":true,"type":0,"id":9685127},{"images":["https://pic4.zhimg.com/v2-4c3338b1e71df6300ce57a3d8cdc0173.jpg"],"type":0,"id":9685206,"ga_prefix":"060307","title":"有哪些典型的「学生思维」？"},{"images":["https://pic1.zhimg.com/v2-89b5a74ba3c50d87b038d1c996225234.jpg"],"type":0,"id":9685145,"ga_prefix":"060306","title":"瞎扯 · 如何正确地吐槽"}]
+     * top_stories : [{"image":"https://pic3.zhimg.com/v2-452df7a06cd2030250eb64f9b17a979e.jpg","type":0,"id":9685215,"ga_prefix":"060309","title":"本周热门精选 · 世界真奇妙"},{"image":"https://pic3.zhimg.com/v2-988badd07226804f765ab69293c8b166.jpg","type":0,"id":9684593,"ga_prefix":"060310","title":"虾籽鲜、虾仁弹、虾黄香，这份鲜香三虾面，一年只卖一季"},{"image":"https://pic3.zhimg.com/v2-6eccf37e894a5a876e6ed7d67cd0897a.jpg","type":0,"id":9685149,"ga_prefix":"060309","title":"苹果又要开新品发布会，我来大胆预测一下\u2026\u2026"},{"image":"https://pic4.zhimg.com/v2-59b02840fb9d090a887337b7ba793c43.jpg","type":0,"id":9683645,"ga_prefix":"060307","title":"好端端的，可有些人就这么活成了喷子"},{"image":"https://pic1.zhimg.com/v2-35d4057230b9d51b51576ba1b885c56c.jpg","type":0,"id":9684422,"ga_prefix":"060308","title":"生物学中有哪些好玩的知识？"}]
      */
 
     private String date;
     private List<StoriesBean> stories;
-    private List<TopStoriesBean> top_stories;
 
     public String getDate() {
         return date;
@@ -34,30 +34,46 @@ public class ZhiHu {
         this.stories = stories;
     }
 
-    public List<TopStoriesBean> getTop_stories() {
-        return top_stories;
-    }
-
-    public void setTop_stories(List<TopStoriesBean> top_stories) {
-        this.top_stories = top_stories;
-    }
-
     public static class StoriesBean {
         /**
-         * images : ["https://pic3.zhimg.com/v2-d0c6d4b8cbd49ea6bd64553b223d8e5e.jpg"]
-         * type : 0
-         * id : 9682758
-         * ga_prefix : 051419
-         * title : DNF 「3 年封号」有冤案？这群「土豪」想打个官司验证一下
+         * title : 虾籽鲜、虾仁弹、虾黄香，这份鲜香三虾面，一年只卖一季
+         * ga_prefix : 060310
+         * images : ["https://pic1.zhimg.com/v2-49ffff254ef991db20e9569c03d8cc38.jpg"]
          * multipic : true
+         * type : 0
+         * id : 9684593
          */
 
+        private String title;
+        private String ga_prefix;
+        private boolean multipic;
         private int type;
         private int id;
-        private String ga_prefix;
-        private String title;
-        private boolean multipic;
         private List<String> images;
+
+        public String getTitle() {
+            return title;
+        }
+
+        public void setTitle(String title) {
+            this.title = title;
+        }
+
+        public String getGa_prefix() {
+            return ga_prefix;
+        }
+
+        public void setGa_prefix(String ga_prefix) {
+            this.ga_prefix = ga_prefix;
+        }
+
+        public boolean isMultipic() {
+            return multipic;
+        }
+
+        public void setMultipic(boolean multipic) {
+            this.multipic = multipic;
+        }
 
         public int getType() {
             return type;
@@ -75,30 +91,6 @@ public class ZhiHu {
             this.id = id;
         }
 
-        public String getGa_prefix() {
-            return ga_prefix;
-        }
-
-        public void setGa_prefix(String ga_prefix) {
-            this.ga_prefix = ga_prefix;
-        }
-
-        public String getTitle() {
-            return title;
-        }
-
-        public void setTitle(String title) {
-            this.title = title;
-        }
-
-        public boolean isMultipic() {
-            return multipic;
-        }
-
-        public void setMultipic(boolean multipic) {
-            this.multipic = multipic;
-        }
-
         public List<String> getImages() {
             return images;
         }
@@ -106,8 +98,5 @@ public class ZhiHu {
         public void setImages(List<String> images) {
             this.images = images;
         }
-    }
-
-    public static class TopStoriesBean {
     }
 }

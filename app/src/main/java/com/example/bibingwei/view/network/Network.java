@@ -23,7 +23,7 @@ public class Network {
         if (zhihuApi == null){
             Retrofit retrofit = new Retrofit.Builder()
                     .client(okHttpClient)
-                    .baseUrl("http://news-at.zhihu.com")
+                    .baseUrl("http://news-at.zhihu.com/")
                     .addConverterFactory(gsonConverterFactory)
                     .addCallAdapterFactory(rxJavaCallAdapterFactory)
                     .build();
