@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
@@ -27,7 +28,6 @@ public class reading_fragment extends Fragment {
     public static reading_fragment newInstance() {
 
         Bundle args = new Bundle();
-
         reading_fragment fragment = new reading_fragment();
         fragment.setArguments(args);
         return fragment;
@@ -47,7 +47,7 @@ public class reading_fragment extends Fragment {
         readingViewPager.addOnPageChangeListener(mOnPageChangeListener);
         mBottomNavigationView = view.findViewById(R.id.reading_container);
         mBottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-        zhihuFragment = Zhihu_fragment.newInstance();
+        zhihuFragment = ZhiHu_fragment.newInstance();
         androidFragment = android_fragment.newInstance();
         iosFragment = ios_fragment.newInstance();
         frontFragment = front_fragment.newInstance();
@@ -58,7 +58,7 @@ public class reading_fragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        readingViewPager.setAdapter(new FragmentStatePagerAdapter(getChildFragmentManager()) {
+        readingViewPager.setAdapter(new FragmentPagerAdapter(getChildFragmentManager()) {
             @Override
             public Fragment getItem(int position) {
                 switch (position){

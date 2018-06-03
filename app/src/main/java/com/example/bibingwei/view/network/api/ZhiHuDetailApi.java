@@ -2,7 +2,7 @@ package com.example.bibingwei.view.network.api;
 
 import com.example.bibingwei.view.bean.ZhiHuDetail;
 
-import retrofit2.Call;
+import io.reactivex.Observable;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 
@@ -10,7 +10,7 @@ import retrofit2.http.Path;
  * @author bibingwei
  *
  */
-public interface ZhihuDetailApi {
+public interface ZhiHuDetailApi {
     @GET("api/4/news/{id}")
-    Call<ZhiHuDetail> getZhiHuDetailInfo(@Path("id") int id);
+    Observable<ZhiHuDetail> getZhiHuDetailInfo(@Path("id") int id);
 }

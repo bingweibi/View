@@ -1,7 +1,6 @@
 package com.example.bibingwei.view;
 
 import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -10,14 +9,14 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.TextView;
 
 import com.example.bibingwei.view.fragments.luck_fragment;
 import com.example.bibingwei.view.fragments.music_fragment;
 import com.example.bibingwei.view.fragments.reading_fragment;
 import com.example.bibingwei.view.fragments.video_fragment;
-import com.githang.statusbar.StatusBarCompat;
+
+import qiu.niorgai.StatusBarCompat;
 
 /**
  * @author bibingwei

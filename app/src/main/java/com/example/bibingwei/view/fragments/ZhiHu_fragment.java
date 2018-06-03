@@ -2,54 +2,55 @@ package com.example.bibingwei.view.fragments;
 
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.bibingwei.view.R;
-import com.example.bibingwei.view.adapter.ZhihuAdapter;
+import com.example.bibingwei.view.activity.ZhihuDailyDetail;
+import com.example.bibingwei.view.adapter.ZhiHuAdapter;
 import com.example.bibingwei.view.bean.ZhiHu;
 import com.example.bibingwei.view.network.Network;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
+
+import static android.support.constraint.Constraints.TAG;
 
 /**
  * A simple {@link Fragment} subclass.
  * @author bibingwei
  */
-public class Zhihu_fragment extends Fragment {
+public class ZhiHu_fragment extends Fragment {
 
     @BindView(R.id.zhiHu_fragment_recyclerView) RecyclerView mRecyclerView;
     @BindView(R.id.zhihuSwipeRefreshLayout)SwipeRefreshLayout mSwipeRefreshLayout;
 
-    private ZhihuAdapter mZhihuAdapter = new ZhihuAdapter();
+    private ZhiHuAdapter mZhiHuAdapter = new ZhiHuAdapter();
+    private List<ZhiHu.StoriesBean> mStoriesBeanList;
 
-    public static Zhihu_fragment newInstance() {
+    public static ZhiHu_fragment newInstance() {
 
         Bundle args = new Bundle();
 
-        Zhihu_fragment fragment = new Zhihu_fragment();
+        ZhiHu_fragment fragment = new ZhiHu_fragment();
         fragment.setArguments(args);
         return fragment;
     }
@@ -67,15 +68,29 @@ public class Zhihu_fragment extends Fragment {
         ButterKnife.bind(this,mView);
 
         mRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(),1));
-        mRecyclerView.setAdapter(mZhihuAdapter);
+        mRecyclerView.setAdapter(mZhiHuAdapter);
         mSwipeRefreshLayout.setColorSchemeColors(Color.BLUE, Color.GREEN, Color.RED, Color.YELLOW);
         mSwipeRefreshLayout.setEnabled(false);
         return mView;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        mZhiHuAdapter.setClickListener(new ZhiHuAdapter.OnItemClickListener() {
+            @Override
+            public void onClick(View view, int position) {
+                Intent intent = new Intent(getContext(), ZhihuDailyDetail.class);
+                int temp = mStoriesBeanList.get(position).getId();
+                intent.putExtra("storyId",mStoriesBeanList.get(position).getId());
+                startActivity(intent);
+            }
+        });
+    }
+
     @SuppressLint("CheckResult")
     private void initData(){
-        Network.getZhihuApi()
+        Network.getZhiHuApi()
                 .getStoriesInfo()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -83,7 +98,8 @@ public class Zhihu_fragment extends Fragment {
                     @Override
                     public void accept(ZhiHu zhiHu) throws Exception {
                         mSwipeRefreshLayout.setRefreshing(false);
-                        mZhihuAdapter.setData(zhiHu.getStories());
+                        mStoriesBeanList = zhiHu.getStories();
+                        mZhiHuAdapter.setData(zhiHu.getStories());
                     }
                 }, new Consumer<Throwable>() {
                     @Override

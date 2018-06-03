@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -20,11 +21,25 @@ import butterknife.ButterKnife;
 /**
  * @author bibingwei
  */
-public class ZhihuAdapter extends RecyclerView.Adapter<ZhihuAdapter.ViewHolder>{
+public class ZhiHuAdapter extends RecyclerView.Adapter<ZhiHuAdapter.ViewHolder>{
 
-    private List<ZhiHu.StoriesBean> mZhihuStories;
+    private List<ZhiHu.StoriesBean> mZhiHuStories;
+    private OnItemClickListener mOnItemClickListener;
 
-    class ViewHolder extends RecyclerView.ViewHolder{
+    public void setClickListener(OnItemClickListener clickListener){
+        this.mOnItemClickListener = clickListener;
+    }
+
+    public interface OnItemClickListener{
+        /**
+         * 点击接口
+         * @param view
+         * @param position
+         */
+        void onClick(View view,int position);
+    }
+
+    class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         @BindView(R.id.zhihuListImageItem) ImageView zhihuImage;
         @BindView(R.id.zhihuListTextItem) TextView zhihuText;
@@ -32,10 +47,18 @@ public class ZhihuAdapter extends RecyclerView.Adapter<ZhihuAdapter.ViewHolder>{
         public ViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this,itemView);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            if (mOnItemClickListener != null) {
+                mOnItemClickListener.onClick(itemView,getAdapterPosition());
+            }
         }
     }
 
-    public ZhihuAdapter() {
+    public ZhiHuAdapter() {
 
     }
 
@@ -48,18 +71,18 @@ public class ZhihuAdapter extends RecyclerView.Adapter<ZhihuAdapter.ViewHolder>{
 
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
-        Glide.with(holder.itemView.getContext()).load(mZhihuStories.get(position).getImages().get(0)).into(holder.zhihuImage);
-        holder.zhihuText.setText(mZhihuStories.get(position).getTitle());
+        Glide.with(holder.itemView.getContext()).load(mZhiHuStories.get(position).getImages().get(0)).into(holder.zhihuImage);
+        holder.zhihuText.setText(mZhiHuStories.get(position).getTitle());
     }
 
 
     @Override
     public int getItemCount() {
-        return mZhihuStories == null ? 0 : mZhihuStories.size();
+        return mZhiHuStories == null ? 0 : mZhiHuStories.size();
     }
 
     public void setData(List<ZhiHu.StoriesBean> storiesBeanList) {
-        this.mZhihuStories = storiesBeanList;
+        this.mZhiHuStories = storiesBeanList;
         notifyDataSetChanged();
     }
 }

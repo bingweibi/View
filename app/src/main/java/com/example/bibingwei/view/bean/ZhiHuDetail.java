@@ -7,6 +7,7 @@ import java.util.List;
  */
 public class ZhiHuDetail {
 
+
     /**
      * body : <div class="main-wrap content-wrap">
      <div class="headline">
@@ -34,7 +35,7 @@ public class ZhiHuDetail {
 
      <div class="content">
      <p>我觉得大家忽略了另一个方面，就是男性被强行定义成了“朝圣者”，我觉得其恶心程度一点儿也不比把女性定义为“路人”低。因为这样一来电影院里的路人男性都被贬低了，好像不粉漫威的男性就不配做男人，没权利看漫威电影一样。</p>
-     <p>性别刻版印象的伤害是双向的。</p>
+     <p>性别刻板印象的伤害是双向的。</p>
      <p>我确定我老公对漫威一毫不粉，就像他对足球不粉一毫一样。但是每到他那群半生不熟的男性朋友面前，他就不得不假装成十分喜爱的样子，不停地说着些废话，以让人相信他是个兴趣正常的男人。每次我在旁边，都觉得这很可悲。</p>
      <p>我确定被绑架兴趣的不止我老公一个。足球，篮球，摄影，漫威，星战，动作大片，网游……除了小黄片是全体真心爱，每种“男性爱好”的队伍中，都充斥着目测至少三分之二的假粉。他们花费大量时间在自己完全不喜欢的事情上面，为的只是“合群”。</p>
      <p>更可笑的是，就像看韩剧的女生会出现群体优越感一样，打网游群体，足球群体，漫威群体……除了小黄片群体能够保留一颗平常心外，都多多少少会出现莫名其妙的优越感来。真的在自己喜欢的领域内很精通优越一下也行，还都是一群“能聊聊”的水平到处晒优越。</p>
@@ -69,12 +70,8 @@ public class ZhiHuDetail {
     private String image_source;
     private String title;
     private String image;
-    private String share_url;
-    private String ga_prefix;
-    private int type;
     private int id;
-    private List<?> js;
-    private List<String> images;
+    private List<String> js;
     private List<String> css;
 
     public String getBody() {
@@ -109,30 +106,6 @@ public class ZhiHuDetail {
         this.image = image;
     }
 
-    public String getShare_url() {
-        return share_url;
-    }
-
-    public void setShare_url(String share_url) {
-        this.share_url = share_url;
-    }
-
-    public String getGa_prefix() {
-        return ga_prefix;
-    }
-
-    public void setGa_prefix(String ga_prefix) {
-        this.ga_prefix = ga_prefix;
-    }
-
-    public int getType() {
-        return type;
-    }
-
-    public void setType(int type) {
-        this.type = type;
-    }
-
     public int getId() {
         return id;
     }
@@ -141,20 +114,12 @@ public class ZhiHuDetail {
         this.id = id;
     }
 
-    public List<?> getJs() {
+    public List<String> getJs() {
         return js;
     }
 
-    public void setJs(List<?> js) {
+    public void setJs(List<String> js) {
         this.js = js;
-    }
-
-    public List<String> getImages() {
-        return images;
-    }
-
-    public void setImages(List<String> images) {
-        this.images = images;
     }
 
     public List<String> getCss() {
