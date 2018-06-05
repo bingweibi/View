@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.bibingwei.view.R;
+import com.example.bibingwei.view.bean.OtherReading;
 import com.example.bibingwei.view.bean.ZhiHu;
 
 import java.util.List;
@@ -20,12 +21,12 @@ import butterknife.ButterKnife;
 /**
  * @author bibingwei
  */
-public class ZhiHuAdapter extends RecyclerView.Adapter<ZhiHuAdapter.ViewHolder>{
+public class ReadingOtherAdapter extends RecyclerView.Adapter<ReadingOtherAdapter.ViewHolder> {
 
-    private List<ZhiHu.StoriesBean> mZhiHuStories;
-    private OnItemClickListener mOnItemClickListener;
+    private List<OtherReading.ResultBean.DataBean> mOtherNews;
+    private ReadingOtherAdapter.OnItemClickListener mOnItemClickListener;
 
-    public void setClickListener(OnItemClickListener clickListener){
+    public void setClickListener(ReadingOtherAdapter.OnItemClickListener clickListener){
         this.mOnItemClickListener = clickListener;
     }
 
@@ -35,13 +36,15 @@ public class ZhiHuAdapter extends RecyclerView.Adapter<ZhiHuAdapter.ViewHolder>{
          * @param view
          * @param position
          */
-        void onClick(View view,int position);
+        void onClick(View view, int position);
     }
 
     class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
-        @BindView(R.id.readingListImageItem) ImageView zhihuImage;
-        @BindView(R.id.readingListTextItem) TextView zhihuText;
+        @BindView(R.id.readingListImageItem)
+        ImageView newsImage;
+        @BindView(R.id.readingListTextItem)
+        TextView newsText;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -57,8 +60,7 @@ public class ZhiHuAdapter extends RecyclerView.Adapter<ZhiHuAdapter.ViewHolder>{
         }
     }
 
-    public ZhiHuAdapter() {
-
+    public ReadingOtherAdapter() {
     }
 
     @NonNull
@@ -69,19 +71,19 @@ public class ZhiHuAdapter extends RecyclerView.Adapter<ZhiHuAdapter.ViewHolder>{
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
-        Glide.with(holder.itemView.getContext()).load(mZhiHuStories.get(position).getImages().get(0)).into(holder.zhihuImage);
-        holder.zhihuText.setText(mZhiHuStories.get(position).getTitle());
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        Glide.with(holder.itemView.getContext()).load(mOtherNews.get(position).getThumbnail_pic_s()).into(holder.newsImage);
+        holder.newsText.setText(mOtherNews.get(position).getTitle());
     }
 
 
     @Override
     public int getItemCount() {
-        return mZhiHuStories == null ? 0 : mZhiHuStories.size();
+        return mOtherNews == null ? 0 : mOtherNews.size();
     }
 
-    public void setData(List<ZhiHu.StoriesBean> storiesBeanList) {
-        this.mZhiHuStories = storiesBeanList;
+    public void setData(List<OtherReading.ResultBean.DataBean> storiesBeanList) {
+        this.mOtherNews = storiesBeanList;
         notifyDataSetChanged();
     }
 }

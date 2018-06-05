@@ -36,8 +36,8 @@ import io.reactivex.schedulers.Schedulers;
  */
 public class ZhiHu_Fragment extends Fragment {
 
-    @BindView(R.id.zhiHu_fragment_recyclerView) RecyclerView mRecyclerView;
-    @BindView(R.id.zhihuSwipeRefreshLayout)SwipeRefreshLayout mSwipeRefreshLayout;
+    @BindView(R.id.reading_fragment_recyclerView) RecyclerView mRecyclerView;
+    @BindView(R.id.readingSwipeRefreshLayout)SwipeRefreshLayout mSwipeRefreshLayout;
 
     private ZhiHuAdapter mZhiHuAdapter = new ZhiHuAdapter();
     private List<ZhiHu.StoriesBean> mStoriesBeanList;
@@ -99,7 +99,7 @@ public class ZhiHu_Fragment extends Fragment {
                     public void accept(ZhiHu zhiHu) throws Exception {
                         mSwipeRefreshLayout.setRefreshing(false);
                         mStoriesBeanList = zhiHu.getStories();
-                        mZhiHuAdapter.setData(zhiHu.getStories());
+                        mZhiHuAdapter.setData(mStoriesBeanList);
                     }
                 }, new Consumer<Throwable>() {
                     @Override
