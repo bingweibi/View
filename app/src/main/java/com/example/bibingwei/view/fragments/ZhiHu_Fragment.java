@@ -66,7 +66,9 @@ public class ZhiHu_Fragment extends Fragment {
         mRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(),1));
         mRecyclerView.setAdapter(mZhiHuAdapter);
         mSwipeRefreshLayout.setColorSchemeColors(Color.BLUE, Color.GREEN, Color.RED, Color.YELLOW);
-        mSwipeRefreshLayout.setEnabled(false);
+        mSwipeRefreshLayout.setDistanceToTriggerSync(250);
+        mSwipeRefreshLayout.setProgressBackgroundColorSchemeColor(Color.WHITE);
+        mSwipeRefreshLayout.setSize(SwipeRefreshLayout.LARGE);
         if (mStoriesBeanList == null){
             mSwipeRefreshLayout.setRefreshing(true);
         }
@@ -80,12 +82,18 @@ public class ZhiHu_Fragment extends Fragment {
             @Override
             public void onClick(View view, int position) {
                 Intent intent = new Intent(getContext(), ZhihuDailyDetail.class);
-                int temp = mStoriesBeanList.get(position).getId();
                 intent.putExtra("storyId",mStoriesBeanList.get(position).getId());
                 startActivity(intent);
             }
         });
 
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                mSwipeRefreshLayout.setRefreshing(true);
+                initData();
+            }
+        });
     }
 
     @SuppressLint("CheckResult")

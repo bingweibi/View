@@ -2,6 +2,7 @@ package com.example.bibingwei.view.fragments;
 
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -15,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.bibingwei.view.R;
+import com.example.bibingwei.view.activity.Reading_NewDetail;
 import com.example.bibingwei.view.adapter.ReadingOtherAdapter;
 import com.example.bibingwei.view.bean.OtherReading;
 import com.example.bibingwei.view.bean.ZhiHu;
@@ -42,6 +44,7 @@ public class Top_Fragment extends Fragment {
     private ReadingOtherAdapter mReadingOtherAdapter = new ReadingOtherAdapter();
     private List<OtherReading.ResultBean.DataBean> mDataBeans;
     private Map<String, String> params = new HashMap<>();
+    private String newsDetail;
 
     public static Top_Fragment newInstance() {
 
@@ -71,7 +74,9 @@ public class Top_Fragment extends Fragment {
         mRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(),1));
         mRecyclerView.setAdapter(mReadingOtherAdapter);
         mSwipeRefreshLayout.setColorSchemeColors(Color.BLUE, Color.GREEN, Color.RED, Color.YELLOW);
-        mSwipeRefreshLayout.setEnabled(false);
+        mSwipeRefreshLayout.setDistanceToTriggerSync(250);
+        mSwipeRefreshLayout.setProgressBackgroundColorSchemeColor(Color.WHITE);
+        mSwipeRefreshLayout.setSize(SwipeRefreshLayout.LARGE);
         if (mDataBeans == null){
             mSwipeRefreshLayout.setRefreshing(true);
         }
@@ -85,7 +90,15 @@ public class Top_Fragment extends Fragment {
         mReadingOtherAdapter.setClickListener(new ReadingOtherAdapter.OnItemClickListener() {
             @Override
             public void onClick(View view, int position) {
-
+                newsDetail = mDataBeans.get(position).getUrl();
+                startActivity(new Intent(getActivity(), Reading_NewDetail.class).putExtra("newsAddress",newsDetail));
+            }
+        });
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                mSwipeRefreshLayout.setRefreshing(true);
+                initData();
             }
         });
     }

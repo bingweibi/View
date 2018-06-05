@@ -5,10 +5,8 @@
     android:layout_height="match_parent"
     tools:context=".fragments.Tiyu_Fragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/ios_fragment" />
+    <include
+        android:id="@+id/container"
+        layout = "@layout/reading_fragment_container"/>
 
 </FrameLayout>

@@ -20,7 +20,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.ZhihuDailyDetail"></activity>
+        <activity android:name=".activity.ZhihuDailyDetail" />
+        <activity android:name=".activity.Reading_NewDetail"></activity>
     </application>
 
 </manifest>
