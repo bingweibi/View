@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".fragments.reading_fragment">
+    tools:context=".fragments.Reading_Fragment">
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/reading_container"

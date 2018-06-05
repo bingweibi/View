@@ -12,18 +12,18 @@ import com.example.bibingwei.view.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class joker_fragment extends Fragment {
+public class Tiyu_Fragment extends Fragment {
 
-    public static joker_fragment newInstance() {
+    public static Tiyu_Fragment newInstance() {
 
         Bundle args = new Bundle();
 
-        joker_fragment fragment = new joker_fragment();
+        Tiyu_Fragment fragment = new Tiyu_Fragment();
         fragment.setArguments(args);
         return fragment;
     }
 
-    public joker_fragment() {
+    public Tiyu_Fragment() {
         // Required empty public constructor
     }
 
@@ -32,7 +32,7 @@ public class joker_fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_joker_fragment, container, false);
+        return inflater.inflate(R.layout.fragment_tiyu_fragment, container, false);
     }
 
 }

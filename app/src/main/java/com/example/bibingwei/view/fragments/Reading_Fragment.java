@@ -6,7 +6,6 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -19,21 +18,21 @@ import com.example.bibingwei.view.R;
  * A simple {@link Fragment} subclass.
  * @author bibingwei
  */
-public class reading_fragment extends Fragment {
+public class Reading_Fragment extends Fragment {
 
     private ViewPager readingViewPager;
     private Fragment zhihuFragment,androidFragment,iosFragment,frontFragment,jokerFragment;
     private BottomNavigationView mBottomNavigationView;
 
-    public static reading_fragment newInstance() {
+    public static Reading_Fragment newInstance() {
 
         Bundle args = new Bundle();
-        reading_fragment fragment = new reading_fragment();
+        Reading_Fragment fragment = new Reading_Fragment();
         fragment.setArguments(args);
         return fragment;
     }
 
-    public reading_fragment() {
+    public Reading_Fragment() {
         // Required empty public constructor
     }
 
@@ -47,11 +46,11 @@ public class reading_fragment extends Fragment {
         readingViewPager.addOnPageChangeListener(mOnPageChangeListener);
         mBottomNavigationView = view.findViewById(R.id.reading_container);
         mBottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-        zhihuFragment = ZhiHu_fragment.newInstance();
-        androidFragment = android_fragment.newInstance();
-        iosFragment = ios_fragment.newInstance();
-        frontFragment = front_fragment.newInstance();
-        jokerFragment = joker_fragment.newInstance();
+        zhihuFragment = ZhiHu_Fragment.newInstance();
+        androidFragment = Top_Fragment.newInstance();
+        iosFragment = Tiyu_Fragment.newInstance();
+        frontFragment = Yule_Fragment.newInstance();
+        jokerFragment = Keji_Fragment.newInstance();
         return view;
     }
 

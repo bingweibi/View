@@ -11,9 +11,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
@@ -32,13 +30,11 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
-import static android.support.constraint.Constraints.TAG;
-
 /**
  * A simple {@link Fragment} subclass.
  * @author bibingwei
  */
-public class ZhiHu_fragment extends Fragment {
+public class ZhiHu_Fragment extends Fragment {
 
     @BindView(R.id.zhiHu_fragment_recyclerView) RecyclerView mRecyclerView;
     @BindView(R.id.zhihuSwipeRefreshLayout)SwipeRefreshLayout mSwipeRefreshLayout;
@@ -46,11 +42,11 @@ public class ZhiHu_fragment extends Fragment {
     private ZhiHuAdapter mZhiHuAdapter = new ZhiHuAdapter();
     private List<ZhiHu.StoriesBean> mStoriesBeanList;
 
-    public static ZhiHu_fragment newInstance() {
+    public static ZhiHu_Fragment newInstance() {
 
         Bundle args = new Bundle();
 
-        ZhiHu_fragment fragment = new ZhiHu_fragment();
+        ZhiHu_Fragment fragment = new ZhiHu_Fragment();
         fragment.setArguments(args);
         return fragment;
     }
@@ -71,6 +67,9 @@ public class ZhiHu_fragment extends Fragment {
         mRecyclerView.setAdapter(mZhiHuAdapter);
         mSwipeRefreshLayout.setColorSchemeColors(Color.BLUE, Color.GREEN, Color.RED, Color.YELLOW);
         mSwipeRefreshLayout.setEnabled(false);
+        if (mStoriesBeanList == null){
+            mSwipeRefreshLayout.setRefreshing(true);
+        }
         return mView;
     }
 
@@ -86,6 +85,7 @@ public class ZhiHu_fragment extends Fragment {
                 startActivity(intent);
             }
         });
+
     }
 
     @SuppressLint("CheckResult")

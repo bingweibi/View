@@ -1,7 +1,7 @@
 package com.example.bibingwei.view.network;
 
-import com.example.bibingwei.view.activity.ZhihuDailyDetail;
-import com.example.bibingwei.view.bean.ZhiHuDetail;
+import com.example.bibingwei.view.bean.OtherReading;
+import com.example.bibingwei.view.network.api.OtherApi;
 import com.example.bibingwei.view.network.api.ZhiHuApi;
 import com.example.bibingwei.view.network.api.ZhiHuDetailApi;
 
@@ -19,6 +19,7 @@ public class Network {
 
     private static ZhiHuApi zhiHuApi;
     private static ZhiHuDetailApi zhiHuDetailApi;
+    private static OtherApi otherApi;
     private static OkHttpClient okHttpClient = new OkHttpClient();
     private static Converter.Factory gsonConverterFactory = GsonConverterFactory.create();
     private static CallAdapter.Factory rxJavaCallAdapterFactory = RxJava2CallAdapterFactory.create();
@@ -47,5 +48,18 @@ public class Network {
             zhiHuDetailApi = retrofit.create(ZhiHuDetailApi.class);
         }
         return zhiHuDetailApi;
+    }
+
+    public static OtherApi getOtherApi(){
+        if (otherApi == null){
+            Retrofit retrofit = new Retrofit.Builder()
+                    .client(okHttpClient)
+                    .baseUrl("http://v.juhe.cn/toutiao/")
+                    .addConverterFactory(gsonConverterFactory)
+                    .addCallAdapterFactory(rxJavaCallAdapterFactory)
+                    .build();
+            otherApi = retrofit.create(OtherApi.class);
+        }
+        return otherApi;
     }
 }

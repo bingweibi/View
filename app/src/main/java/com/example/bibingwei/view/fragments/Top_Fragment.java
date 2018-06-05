@@ -11,28 +11,24 @@ import com.example.bibingwei.view.R;
 
 /**
  * A simple {@link Fragment} subclass.
+ * @author bibingwei
  */
-public class front_fragment extends Fragment {
+public class Top_Fragment extends Fragment {
 
-    public static front_fragment newInstance() {
-        
-        Bundle args = new Bundle();
-        
-        front_fragment fragment = new front_fragment();
-        fragment.setArguments(args);
+    public static Top_Fragment newInstance() {
+
+        Top_Fragment fragment = new Top_Fragment();
         return fragment;
     }
 
-    public front_fragment() {
+    public Top_Fragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_front_fragment, container, false);
+        return inflater.inflate(R.layout.fragment_top_fragment, container, false);
     }
-
 }
