@@ -26,16 +26,38 @@ import butterknife.ButterKnife;
 public class LuckImageAdapter extends RecyclerView.Adapter<LuckImageAdapter.ViewHolder>{
 
     private List<LuckImage.ResultsBean> mResultsBeans;
-    private int imageWidth;
+    private OnItemLongClickListener mOnItemLongClickListener;
+
+    public void setLongClickListener(OnItemLongClickListener longClickListener){
+        this.mOnItemLongClickListener = longClickListener;
+    }
+
+    public interface OnItemLongClickListener{
+        /**
+         * 点击接口
+         * @param view
+         * @param position
+         */
+        void onLongClick(View view,int position);
+    }
 
 
-    class ViewHolder extends RecyclerView.ViewHolder{
+    class ViewHolder extends RecyclerView.ViewHolder implements View.OnLongClickListener{
 
         @BindView(R.id.luck_image_item) ImageView luckImage;
 
         public ViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this,itemView);
+        }
+
+        @Override
+        public boolean onLongClick(View v) {
+
+            if (mOnItemLongClickListener != null) {
+                mOnItemLongClickListener.onLongClick(itemView,getAdapterPosition());
+            }
+            return false;
         }
     }
 

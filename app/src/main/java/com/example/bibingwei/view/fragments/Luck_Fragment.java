@@ -4,6 +4,7 @@ package com.example.bibingwei.view.fragments;
 import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
@@ -82,7 +83,32 @@ public class Luck_Fragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        mLuckImageAdapter.setLongClickListener(new LuckImageAdapter.OnItemLongClickListener() {
+            @Override
+            public void onLongClick(View view, int position) {
+                Toast.makeText(getContext(),"不提供保存，谢谢！",Toast.LENGTH_SHORT).show();
+            }
+        });
 
+//        mDiscreteScrollView.addScrollStateChangeListener(new DiscreteScrollView.ScrollStateChangeListener<RecyclerView.ViewHolder>() {
+//            @Override
+//            public void onScrollStart(@NonNull RecyclerView.ViewHolder currentItemHolder, int adapterPosition) {
+////                Toast.makeText(getContext(),""+adapterPosition,Toast.LENGTH_SHORT).show();
+////                if (adapterPosition % 8 ==0 && adapterPosition>0){
+////                    initData(++num);
+////                }
+//            }
+//
+//            @Override
+//            public void onScrollEnd(@NonNull RecyclerView.ViewHolder currentItemHolder, int adapterPosition) {
+//
+//            }
+//
+//            @Override
+//            public void onScroll(float scrollPosition, int currentPosition, int newPosition, @Nullable RecyclerView.ViewHolder currentHolder, @Nullable RecyclerView.ViewHolder newCurrent) {
+//
+//            }
+//        });
     }
 
     @SuppressLint("CheckResult")
