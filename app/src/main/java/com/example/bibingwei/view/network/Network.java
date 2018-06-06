@@ -1,6 +1,7 @@
 package com.example.bibingwei.view.network;
 
 import com.example.bibingwei.view.bean.OtherReading;
+import com.example.bibingwei.view.network.api.LuckImageApi;
 import com.example.bibingwei.view.network.api.OtherApi;
 import com.example.bibingwei.view.network.api.ZhiHuApi;
 import com.example.bibingwei.view.network.api.ZhiHuDetailApi;
@@ -20,6 +21,7 @@ public class Network {
     private static ZhiHuApi zhiHuApi;
     private static ZhiHuDetailApi zhiHuDetailApi;
     private static OtherApi otherApi;
+    private static LuckImageApi luckImageApi;
     private static OkHttpClient okHttpClient = new OkHttpClient();
     private static Converter.Factory gsonConverterFactory = GsonConverterFactory.create();
     private static CallAdapter.Factory rxJavaCallAdapterFactory = RxJava2CallAdapterFactory.create();
@@ -61,5 +63,18 @@ public class Network {
             otherApi = retrofit.create(OtherApi.class);
         }
         return otherApi;
+    }
+
+    public static LuckImageApi getLuckImageApi(){
+        if (luckImageApi == null){
+            Retrofit retrofit = new Retrofit.Builder()
+                    .client(okHttpClient)
+                    .baseUrl("http://gank.io/api/")
+                    .addConverterFactory(gsonConverterFactory)
+                    .addCallAdapterFactory(rxJavaCallAdapterFactory)
+                    .build();
+            luckImageApi = retrofit.create(LuckImageApi.class);
+        }
+        return luckImageApi;
     }
 }

@@ -29,6 +29,7 @@ import butterknife.ButterKnife;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
+import qiu.niorgai.StatusBarCompat;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -54,6 +55,8 @@ public class ZhiHu_Fragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        StatusBarCompat.setStatusBarColor(getActivity(), Color.parseColor("#3F51B5"));
         initData();
     }
 

@@ -3,12 +3,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.luck_fragment">
+    tools:context=".fragments.Luck_Fragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <ImageView
+        android:id="@+id/luck_image_background"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/luck_fragment" />
+        android:background="#3f000000"
+        android:scaleType="centerCrop"/>
 
+    <com.yarolegovich.discretescrollview.DiscreteScrollView
+        android:id="@+id/luck_image_recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:overScrollMode="never"
+        android:layout_marginBottom="30dp"
+        android:layout_marginTop="30dp"/>
 </FrameLayout>
