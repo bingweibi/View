@@ -3,12 +3,55 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".fragments.music_fragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <ImageView
+        android:id="@+id/musicBackground"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/music_fragment" />
-
+        android:orientation="vertical">
+        <ImageButton
+            android:id="@+id/musicFengmian"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="#00000000"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <ImageButton
+                android:id="@+id/playOrPause"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:src ="@drawable/pause"
+                android:background="#00000000"/>
+            <ImageButton
+                android:id="@+id/nextSong"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:src ="@drawable/next"
+                android:background="#00000000"/>
+            <ImageButton
+                android:id="@+id/downloadSong"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:src="@drawable/download"
+                android:background="#00000000"/>
+            <ImageButton
+                android:id="@+id/searchSong"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:src="@drawable/search"
+                android:background="#00000000"/>
+        </LinearLayout>
+    </LinearLayout>
 </FrameLayout>
