@@ -57,7 +57,6 @@ public class Luck_Fragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        StatusBarCompat.setStatusBarColor(getActivity(), Color.parseColor("#3F51B5"));
         initData(num);
     }
 

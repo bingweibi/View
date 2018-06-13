@@ -30,6 +30,7 @@ import butterknife.ButterKnife;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
+import qiu.niorgai.StatusBarCompat;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -58,6 +59,7 @@ public class Tiyu_Fragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         params.put("type","tiyu");
         params.put("key","67f32c45c280e80ff8b1efb217d0ddc2");
         initData();
@@ -119,7 +121,7 @@ public class Tiyu_Fragment extends Fragment {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
                         mSwipeRefreshLayout.setRefreshing(false);
-                        Toast.makeText(getContext(),"加载失败",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(),"请及时补充能量",Toast.LENGTH_SHORT).show();
                     }
                 });
     }

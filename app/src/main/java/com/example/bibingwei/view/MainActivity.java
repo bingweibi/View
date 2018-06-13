@@ -33,7 +33,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        StatusBarCompat.setStatusBarColor(this, Color.parseColor("#3F51B5"));
+        //透明状态栏
+        StatusBarCompat.translucentStatusBar(this);
+        //SDK >= 21时, 取消状态栏的阴影
+        StatusBarCompat.translucentStatusBar(this,false);
         titleView = findViewById(R.id.title);
         mViewPager = findViewById(R.id.fragment_container);
         mViewPager.addOnPageChangeListener(mOnPageChangeListener);

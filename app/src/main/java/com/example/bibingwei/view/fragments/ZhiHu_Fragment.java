@@ -1,6 +1,5 @@
 package com.example.bibingwei.view.fragments;
 
-
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
@@ -56,7 +55,6 @@ public class ZhiHu_Fragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        StatusBarCompat.setStatusBarColor(getActivity(), Color.parseColor("#3F51B5"));
         initData();
     }
 
@@ -107,14 +105,14 @@ public class ZhiHu_Fragment extends Fragment {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<ZhiHu>() {
                     @Override
-                    public void accept(ZhiHu zhiHu) throws Exception {
+                    public void accept(ZhiHu zhiHu) {
                         mSwipeRefreshLayout.setRefreshing(false);
                         mStoriesBeanList = zhiHu.getStories();
                         mZhiHuAdapter.setData(mStoriesBeanList);
                     }
                 }, new Consumer<Throwable>() {
                     @Override
-                    public void accept(Throwable throwable) throws Exception {
+                    public void accept(Throwable throwable) {
                         mSwipeRefreshLayout.setRefreshing(false);
                         Toast.makeText(getContext(),"加载失败",Toast.LENGTH_SHORT).show();
                     }
