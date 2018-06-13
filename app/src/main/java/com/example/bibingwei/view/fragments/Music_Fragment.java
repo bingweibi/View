@@ -6,18 +6,17 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
-
-import com.bumptech.glide.Glide;
 import com.example.bibingwei.view.R;
-import com.example.bibingwei.view.bean.RandomMusic;
-import com.example.bibingwei.view.bean.RandomMusic.QqBean;
+import com.example.bibingwei.view.bean.RandomMusicAlbum;
 import com.example.bibingwei.view.network.Network;
+import com.freedom.lauzy.playpauseviewlib.PlayPauseView;
 
 import java.util.List;
 
@@ -26,29 +25,29 @@ import butterknife.ButterKnife;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
-import jp.wasabeef.glide.transformations.BlurTransformation;
-
-import static com.bumptech.glide.request.RequestOptions.bitmapTransform;
 
 /**
  * A simple {@link Fragment} subclass.
  * @author bibingwei
  */
-public class music_fragment extends Fragment {
-    @BindView(R.id.musicBackground) ImageView musicBackground;
-    @BindView(R.id.musicFengmian)ImageButton musicFengMian;
-    private List<RandomMusic.QqBean.AlbumListBean> musicList;
+public class Music_Fragment extends Fragment {
 
-    public static music_fragment newInstance() {
-        
-        Bundle args = new Bundle();
-        
-        music_fragment fragment = new music_fragment();
-        fragment.setArguments(args);
-        return fragment;
+    @BindView(R.id.musicBackground)ImageView musicImage;
+    @BindView(R.id.songList)RecyclerView songListRecyclerView;
+    @BindView(R.id.songImage)ImageView songSmallImage;
+    @BindView(R.id.musicTitle)TextView songTitle;
+    @BindView(R.id.singerName)TextView singName;
+    @BindView(R.id.frontSong)ImageView frontSong;
+    @BindView(R.id.play_pause_view)com.freedom.lauzy.playpauseviewlib.PlayPauseView mPlayPauseView;
+    @BindView(R.id.nextSong)ImageView nextSong;
+
+    private List<RandomMusicAlbum.QqBean.AlbumListBean> musicList;
+
+    public static Music_Fragment newInstance() {
+        return new Music_Fragment();
     }
     
-    public music_fragment() {
+    public Music_Fragment() {
         // Required empty public constructor
     }
 
@@ -70,23 +69,47 @@ public class music_fragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        MediaPlayer mediaPlayer = new MediaPlayer();
 
-        Glide.with(this).load(R.drawable.test)
-                .apply(bitmapTransform(new BlurTransformation(10, 3)))
-                .into(musicBackground);
+        mPlayPauseView.setPlayPauseListener(new PlayPauseView.PlayPauseListener() {
+            @Override
+            public void play() {
+                //播放音乐
+            }
+
+            @Override
+            public void pause() {
+                //音乐暂停
+            }
+        });
+
+        //上一曲
+        frontSong.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        //下一曲
+        nextSong.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
     }
+
 
     @SuppressLint("CheckResult")
     private void initData() {
-        Network.getRandomMusicApi()
+        Network.getRandomAlbumApi()
                 .getMusicId()
-                .observeOn(Schedulers.io())
+                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<RandomMusic>() {
+                .subscribe(new Consumer<RandomMusicAlbum>() {
                     @Override
-                    public void accept(RandomMusic randomMusic) {
-                        musicList = randomMusic.getQq().getAlbumList();
+                    public void accept(RandomMusicAlbum randomMusicAlbum) {
+                        musicList = randomMusicAlbum.getQq().getAlbumList();
                     }
                 }, new Consumer<Throwable>() {
                     @Override

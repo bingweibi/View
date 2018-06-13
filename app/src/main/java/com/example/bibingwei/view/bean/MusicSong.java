@@ -3,7 +3,7 @@ package com.example.bibingwei.view.bean;
 /**
  * @author bibingwei
  */
-public class Music {
+public class MusicSong {
 
     /**
      * success : true

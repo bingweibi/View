@@ -1,9 +1,9 @@
 package com.example.bibingwei.view.network;
 
-import com.example.bibingwei.view.bean.OtherReading;
 import com.example.bibingwei.view.network.api.LuckImageApi;
+import com.example.bibingwei.view.network.api.MusicSongApi;
 import com.example.bibingwei.view.network.api.OtherApi;
-import com.example.bibingwei.view.network.api.RandomMusicApi;
+import com.example.bibingwei.view.network.api.RandomMusicAlbumApi;
 import com.example.bibingwei.view.network.api.ZhiHuApi;
 import com.example.bibingwei.view.network.api.ZhiHuDetailApi;
 
@@ -23,7 +23,8 @@ public class Network {
     private static ZhiHuDetailApi zhiHuDetailApi;
     private static OtherApi otherApi;
     private static LuckImageApi luckImageApi;
-    private static RandomMusicApi randomMusicApi;
+    private static RandomMusicAlbumApi randomMusicAlbumApi;
+    private static MusicSongApi musicSongApi;
     private static OkHttpClient okHttpClient = new OkHttpClient();
     private static Converter.Factory gsonConverterFactory = GsonConverterFactory.create();
     private static CallAdapter.Factory rxJavaCallAdapterFactory = RxJava2CallAdapterFactory.create();
@@ -80,16 +81,29 @@ public class Network {
         return luckImageApi;
     }
 
-    public static RandomMusicApi getRandomMusicApi(){
-        if (randomMusicApi == null){
+    public static RandomMusicAlbumApi getRandomAlbumApi(){
+        if (randomMusicAlbumApi == null){
             Retrofit retrofit = new Retrofit.Builder()
                     .client(okHttpClient)
                     .baseUrl("https://music-api-jwzcyzizya.now.sh/api/")
                     .addCallAdapterFactory(rxJavaCallAdapterFactory)
                     .addConverterFactory(gsonConverterFactory)
                     .build();
-            randomMusicApi = retrofit.create(RandomMusicApi.class);
+            randomMusicAlbumApi = retrofit.create(RandomMusicAlbumApi.class);
         }
-        return randomMusicApi;
+        return randomMusicAlbumApi;
+    }
+
+    public static MusicSongApi getMusicSongApi(){
+        if (musicSongApi == null){
+            Retrofit retrofit = new Retrofit.Builder()
+                    .client(okHttpClient)
+                    .baseUrl("https://music-api-jwzcyzizya.now.sh/api/")
+                    .addConverterFactory(gsonConverterFactory)
+                    .addCallAdapterFactory(rxJavaCallAdapterFactory)
+                    .build();
+            musicSongApi = retrofit.create(MusicSongApi.class);
+        }
+        return musicSongApi;
     }
 }

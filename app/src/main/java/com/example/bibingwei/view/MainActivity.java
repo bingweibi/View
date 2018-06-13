@@ -12,7 +12,7 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.example.bibingwei.view.fragments.Luck_Fragment;
-import com.example.bibingwei.view.fragments.music_fragment;
+import com.example.bibingwei.view.fragments.Music_Fragment;
 import com.example.bibingwei.view.fragments.Reading_Fragment;
 import com.example.bibingwei.view.fragments.video_fragment;
 
@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         readingFragment = Reading_Fragment.newInstance();
         luckFragment = Luck_Fragment.newInstance();
-        musicFragment = music_fragment.newInstance();
+        musicFragment = Music_Fragment.newInstance();
         videoFragment = video_fragment.newInstance();
     }
 

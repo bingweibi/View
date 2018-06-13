@@ -69,4 +69,7 @@ dependencies {
 
     //discrete-scrollview
     implementation 'com.yarolegovich:discrete-scrollview:1.4.7'
+
+    //开关播放按钮动画实现
+    implementation 'com.github.Lauzy:PlayPauseView:1.0.4'
 }
