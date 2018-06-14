@@ -27,12 +27,16 @@ public class Reading_Fragment extends Fragment {
     private ViewPager readingViewPager;
     private Fragment zhihuFragment,androidFragment,iosFragment,frontFragment,jokerFragment;
     private BottomNavigationView mBottomNavigationView;
+    private volatile  static Reading_Fragment fragment;
 
     public static Reading_Fragment newInstance() {
-
-        Bundle args = new Bundle();
-        Reading_Fragment fragment = new Reading_Fragment();
-        fragment.setArguments(args);
+        if (fragment == null){
+            synchronized (Reading_Fragment.class){
+                if (fragment == null){
+                    fragment = new Reading_Fragment();
+                }
+            }
+        }
         return fragment;
     }
 

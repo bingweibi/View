@@ -44,8 +44,16 @@ public class Luck_Fragment extends Fragment {
     private List<LuckImage.ResultsBean> mResultsBeanList;
     private int num = 1;
 
+    private volatile  static Luck_Fragment fragment;
+
     public static Luck_Fragment newInstance() {
-        Luck_Fragment fragment = new Luck_Fragment();
+        if (fragment == null){
+            synchronized (Luck_Fragment.class){
+                if (fragment == null){
+                    fragment = new Luck_Fragment();
+                }
+            }
+        }
         return fragment;
     }
 

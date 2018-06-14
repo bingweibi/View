@@ -47,8 +47,16 @@ public class Yule_Fragment extends Fragment {
     private Map<String, String> params = new HashMap<>();
     private String newsDetail;
 
+    private volatile  static Yule_Fragment fragment;
+
     public static Yule_Fragment newInstance() {
-        Yule_Fragment fragment = new Yule_Fragment();
+        if (fragment == null){
+            synchronized (Yule_Fragment.class){
+                if (fragment == null){
+                    fragment = new Yule_Fragment();
+                }
+            }
+        }
         return fragment;
     }
 
@@ -121,7 +129,7 @@ public class Yule_Fragment extends Fragment {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
                         mSwipeRefreshLayout.setRefreshing(false);
-                        Toast.makeText(getContext(),"请及时补充能量",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(),"来根士力架!",Toast.LENGTH_SHORT).show();
                     }
                 });
     }

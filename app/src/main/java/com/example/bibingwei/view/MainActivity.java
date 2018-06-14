@@ -1,6 +1,5 @@
 package com.example.bibingwei.view;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -14,7 +13,7 @@ import android.widget.TextView;
 import com.example.bibingwei.view.fragments.Luck_Fragment;
 import com.example.bibingwei.view.fragments.Music_Fragment;
 import com.example.bibingwei.view.fragments.Reading_Fragment;
-import com.example.bibingwei.view.fragments.video_fragment;
+import com.example.bibingwei.view.fragments.Video_fragment;
 
 import qiu.niorgai.StatusBarCompat;
 
@@ -45,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         readingFragment = Reading_Fragment.newInstance();
         luckFragment = Luck_Fragment.newInstance();
         musicFragment = Music_Fragment.newInstance();
-        videoFragment = video_fragment.newInstance();
+        videoFragment = Video_fragment.newInstance();
     }
 
     @Override

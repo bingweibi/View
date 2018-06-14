@@ -12,18 +12,22 @@ import com.example.bibingwei.view.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class video_fragment extends Fragment {
+public class Video_fragment extends Fragment {
 
-    public static video_fragment newInstance() {
-        
-        Bundle args = new Bundle();
-        
-        video_fragment fragment = new video_fragment();
-        fragment.setArguments(args);
+    private volatile  static Video_fragment fragment;
+
+    public static Video_fragment newInstance() {
+        if (fragment == null){
+            synchronized (Video_fragment.class){
+                if (fragment == null){
+                    fragment = new Video_fragment();
+                }
+            }
+        }
         return fragment;
     }
 
-    public video_fragment() {
+    public Video_fragment() {
         // Required empty public constructor
     }
 

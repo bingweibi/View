@@ -1,6 +1,5 @@
 package com.example.bibingwei.view.fragments;
 
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.media.AudioManager;
@@ -38,7 +37,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
-
 /**
  * A simple {@link Fragment} subclass.
  * @author bibingwei
@@ -62,10 +60,18 @@ public class Music_Fragment extends Fragment {
     private int musicPosition;
     private int musicCurrentPlayPosition = 0;
 
+    private volatile  static Music_Fragment fragment;
+
     public static Music_Fragment newInstance() {
-        return new Music_Fragment();
+        if (fragment == null){
+            synchronized (Music_Fragment.class){
+                if (fragment == null){
+                    fragment = new Music_Fragment();
+                }
+            }
+        }
+        return fragment;
     }
-    
     public Music_Fragment() {
         // Required empty public constructor
     }

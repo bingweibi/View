@@ -46,9 +46,16 @@ public class Keji_Fragment extends Fragment {
     private List<OtherReading.ResultBean.DataBean> mDataBeans;
     private Map<String, String> params = new HashMap<>();
     private String newsDetail;
+    private volatile  static Keji_Fragment fragment;
 
     public static Keji_Fragment newInstance() {
-        Keji_Fragment fragment = new Keji_Fragment();
+        if (fragment == null){
+            synchronized (Keji_Fragment.class){
+                if (fragment == null){
+                    fragment = new Keji_Fragment();
+                }
+            }
+        }
         return fragment;
     }
 
@@ -121,7 +128,7 @@ public class Keji_Fragment extends Fragment {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
                         mSwipeRefreshLayout.setRefreshing(false);
-                        Toast.makeText(getContext(),"请及时补充能量",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(),"我们都是局外人!",Toast.LENGTH_SHORT).show();
                     }
                 });
     }

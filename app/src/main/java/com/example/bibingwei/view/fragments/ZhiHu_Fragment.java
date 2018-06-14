@@ -42,15 +42,18 @@ public class ZhiHu_Fragment extends Fragment {
     private ZhiHuAdapter mZhiHuAdapter = new ZhiHuAdapter();
     private List<ZhiHu.StoriesBean> mStoriesBeanList;
 
+    private volatile  static ZhiHu_Fragment fragment;
+
     public static ZhiHu_Fragment newInstance() {
-
-        Bundle args = new Bundle();
-
-        ZhiHu_Fragment fragment = new ZhiHu_Fragment();
-        fragment.setArguments(args);
+        if (fragment == null){
+            synchronized (ZhiHu_Fragment.class){
+                if (fragment == null){
+                    fragment = new ZhiHu_Fragment();
+                }
+            }
+        }
         return fragment;
     }
-
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

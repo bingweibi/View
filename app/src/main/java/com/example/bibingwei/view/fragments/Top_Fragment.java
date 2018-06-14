@@ -47,9 +47,16 @@ public class Top_Fragment extends Fragment {
     private Map<String, String> params = new HashMap<>();
     private String newsDetail;
 
-    public static Top_Fragment newInstance() {
+    private volatile  static Top_Fragment fragment;
 
-        Top_Fragment fragment = new Top_Fragment();
+    public static Top_Fragment newInstance() {
+        if (fragment == null){
+            synchronized (Top_Fragment.class){
+                if (fragment == null){
+                    fragment = new Top_Fragment();
+                }
+            }
+        }
         return fragment;
     }
 
@@ -122,7 +129,7 @@ public class Top_Fragment extends Fragment {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
                         mSwipeRefreshLayout.setRefreshing(false);
-                        Toast.makeText(getContext(),"请及时补充能量",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(),"请及时补充能量!",Toast.LENGTH_SHORT).show();
                     }
                 });
     }

@@ -47,8 +47,16 @@ public class Tiyu_Fragment extends Fragment {
     private Map<String, String> params = new HashMap<>();
     private String newsDetail;
 
+    private volatile  static Tiyu_Fragment fragment;
+
     public static Tiyu_Fragment newInstance() {
-        Tiyu_Fragment fragment = new Tiyu_Fragment();
+        if (fragment == null){
+            synchronized (Tiyu_Fragment.class){
+                if (fragment == null){
+                    fragment = new Tiyu_Fragment();
+                }
+            }
+        }
         return fragment;
     }
 
@@ -121,7 +129,7 @@ public class Tiyu_Fragment extends Fragment {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
                         mSwipeRefreshLayout.setRefreshing(false);
-                        Toast.makeText(getContext(),"请及时补充能量",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(),"跑跑跑不动了!",Toast.LENGTH_SHORT).show();
                     }
                 });
     }
