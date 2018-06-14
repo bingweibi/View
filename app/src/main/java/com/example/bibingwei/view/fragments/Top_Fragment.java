@@ -63,7 +63,6 @@ public class Top_Fragment extends Fragment {
 
         params.put("type","top");
         params.put("key","67f32c45c280e80ff8b1efb217d0ddc2");
-        initData();
     }
 
     @Override
@@ -73,6 +72,7 @@ public class Top_Fragment extends Fragment {
         View mView = inflater.inflate(R.layout.fragment_top_fragment, container, false);
         ButterKnife.bind(this,mView);
 
+        initData();
         mRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(),1));
         mRecyclerView.setAdapter(mReadingOtherAdapter);
         mSwipeRefreshLayout.setColorSchemeColors(Color.BLUE, Color.GREEN, Color.RED, Color.YELLOW);

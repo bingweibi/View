@@ -17,27 +17,29 @@
 
         <ImageView
             android:id="@+id/musicListImageItem"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
             android:padding="10dp" />
-        <TextView
-            android:id="@+id/musicListTitle"
+        <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="18sp"
+            android:layout_height="match_parent"
             android:layout_marginStart="15dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginTop="20dp"
-            android:layout_toEndOf="@id/musicListImageItem"
-            android:layout_above="@id/musicListAuthor"/>
-        <TextView
-            android:id="@+id/musicListAuthor"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="12sp"
-            android:layout_marginStart="15dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginTop="20dp"
-            android:layout_toEndOf="@id/musicListImageItem" />
+            android:orientation="vertical"
+            android:layout_toEndOf="@id/musicListImageItem">
+
+            <TextView
+                android:id="@+id/musicListTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="15sp"
+                android:textColor="#000"
+                android:layout_marginTop="8dp" />
+            <TextView
+                android:id="@+id/musicListAuthor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:layout_marginTop="5dp" />
+        </LinearLayout>
     </RelativeLayout>
 </android.support.v7.widget.CardView>

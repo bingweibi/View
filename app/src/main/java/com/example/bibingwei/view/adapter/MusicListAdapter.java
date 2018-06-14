@@ -71,7 +71,7 @@ public class MusicListAdapter extends RecyclerView.Adapter<MusicListAdapter.View
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-        Glide.with(holder.itemView.getContext()).load(mSongListBeans.get(position).getPic_small()).into(holder.musicListImageItem);
+        Glide.with(holder.itemView.getContext()).load(mSongListBeans.get(position).getPic_big()).into(holder.musicListImageItem);
         holder.musicListTitle.setText(mSongListBeans.get(position).getTitle());
         holder.musicListAuthor.setText(mSongListBeans.get(position).getArtist_name());
     }

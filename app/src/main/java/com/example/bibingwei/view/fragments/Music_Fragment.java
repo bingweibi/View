@@ -2,13 +2,14 @@ package com.example.bibingwei.view.fragments;
 
 
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,10 +21,15 @@ import com.bumptech.glide.Glide;
 import com.example.bibingwei.view.R;
 import com.example.bibingwei.view.adapter.MusicListAdapter;
 import com.example.bibingwei.view.bean.Music;
+import com.example.bibingwei.view.bean.MusicPlay;
 import com.example.bibingwei.view.network.Network;
 import com.freedom.lauzy.playpauseviewlib.PlayPauseView;
 
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 import butterknife.BindView;
@@ -31,7 +37,7 @@ import butterknife.ButterKnife;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
-import qiu.niorgai.StatusBarCompat;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -39,7 +45,6 @@ import qiu.niorgai.StatusBarCompat;
  */
 public class Music_Fragment extends Fragment {
 
-    @BindView(R.id.musicBackground)ImageView musicImage;
     @BindView(R.id.songList)RecyclerView songListRecyclerView;
     @BindView(R.id.songImage)ImageView songSmallImage;
     @BindView(R.id.musicTitle)TextView songTitle;
@@ -50,6 +55,12 @@ public class Music_Fragment extends Fragment {
 
     private List<Music.SongListBean> musicList;
     private MusicListAdapter mMusicListAdapter = new MusicListAdapter();
+    MediaPlayer mMediaPlayer = new MediaPlayer();
+    private String musicPlayUrl;
+    private Map<String,String> params = new HashMap<>();
+    private Context mContext ;
+    private int musicPosition;
+    private int musicCurrentPlayPosition = 0;
 
     public static Music_Fragment newInstance() {
         return new Music_Fragment();
@@ -62,7 +73,7 @@ public class Music_Fragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        mContext = getContext();
         initData();
     }
 
@@ -82,22 +93,31 @@ public class Music_Fragment extends Fragment {
     public void onResume() {
         super.onResume();
 
-        if (musicList == null){
-            Glide.with(Objects.requireNonNull(getActivity())).load(R.drawable.music).into(musicImage);
-        }else {
-            Glide.with(Objects.requireNonNull(getActivity())).load(musicList.get(0).getPic_big()).into(musicImage);
-        }
+        mMusicListAdapter.setClickListener(new MusicListAdapter.OnItemClickListener() {
+            @Override
+            public void onClick(View view, int position) {
+
+                musicPosition = position;
+                musicCurrentPlayPosition = 0;
+                params.put("method","baidu.ting.song.play");
+                params.put("songid",musicList.get(musicPosition).getSong_id());
+                musicInfo();
+            }
+        });
 
         mPlayPauseView.setPlayPauseListener(new PlayPauseView.PlayPauseListener() {
             @Override
             public void play() {
                 //播放音乐
-
+                mMediaPlayer.seekTo(musicCurrentPlayPosition);
+                mMediaPlayer.start();
             }
 
             @Override
             public void pause() {
                 //音乐暂停
+                mMediaPlayer.pause();
+                musicCurrentPlayPosition = mMediaPlayer.getCurrentPosition();
             }
         });
 
@@ -105,7 +125,14 @@ public class Music_Fragment extends Fragment {
         frontSong.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                if (musicPosition-1<0){
+                    musicPosition = musicList.size()-1;
+                }else {
+                    --musicPosition;
+                }
+                params.put("method","baidu.ting.song.play");
+                params.put("songid",musicList.get(musicPosition).getSong_id());
+                musicInfo();
             }
         });
 
@@ -114,14 +141,66 @@ public class Music_Fragment extends Fragment {
             @Override
             public void onClick(View v) {
 
+                if (musicPosition+1 == musicList.size()){
+                    musicPosition = 0;
+                }else {
+                    ++musicPosition;
+                }
+                params.put("method","baidu.ting.song.play");
+                params.put("songid",musicList.get(musicPosition).getSong_id());
+                musicInfo();
             }
         });
     }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        mMediaPlayer.pause();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        mMediaPlayer.release();
+    }
+
+    @SuppressLint("CheckResult")
+    private void musicInfo( ) {
+        Network.getMusicPlayApi(mContext)
+                .getMusicUrl(params)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<MusicPlay>() {
+                    @Override
+                    public void accept(MusicPlay musicPlay) {
+                        musicPlayUrl = musicPlay.getBitrate().getShow_link();
+                        songTitle.setText(musicPlay.getSonginfo().getTitle());
+                        singName.setText(musicPlay.getSonginfo().getAuthor());
+                        Glide.with(Objects.requireNonNull(getContext())).load(musicPlay.getSonginfo().getPic_small()).into(songSmallImage);
+                        //播放音乐
+                        try {
+                            mPlayPauseView.play();
+                            mMediaPlayer.reset();
+                            mMediaPlayer.setDataSource(musicPlayUrl);
+                            mMediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+                            mMediaPlayer.prepare();
+                            mMediaPlayer.start();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) {
+                        Toast.makeText(getActivity(),"musicPlay正在抓紧修复",Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
 
     @SuppressLint("CheckResult")
     private void initData() {
-        Network.getMusicApi(getContext())
+        Network.getMusicApi(mContext)
                 .getMusicList()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -134,7 +213,7 @@ public class Music_Fragment extends Fragment {
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) {
-                        Toast.makeText(getActivity(),"music正在抓紧修复",Toast.LENGTH_LONG).show();
+                        Toast.makeText(getActivity(),"music正在抓紧修复",Toast.LENGTH_SHORT).show();
                     }
                 });
     }

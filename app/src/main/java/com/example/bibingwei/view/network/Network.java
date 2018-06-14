@@ -7,6 +7,7 @@ import android.webkit.WebSettings;
 import com.example.bibingwei.view.bean.Music;
 import com.example.bibingwei.view.network.api.LuckImageApi;
 import com.example.bibingwei.view.network.api.MusicApi;
+import com.example.bibingwei.view.network.api.MusicPlayApi;
 import com.example.bibingwei.view.network.api.OtherApi;
 import com.example.bibingwei.view.network.api.ZhiHuApi;
 import com.example.bibingwei.view.network.api.ZhiHuDetailApi;
@@ -34,8 +35,8 @@ public class Network {
     private static OtherApi otherApi;
     private static LuckImageApi luckImageApi;
     private static MusicApi musicApi;
+    private static MusicPlayApi musicPlayApi;
     private static OkHttpClient okHttpClient = new OkHttpClient();
-    private static OkHttpClient.Builder okBuilder = new OkHttpClient.Builder();
     private static Converter.Factory gsonConverterFactory = GsonConverterFactory.create();
     private static CallAdapter.Factory rxJavaCallAdapterFactory = RxJava2CallAdapterFactory.create();
 
@@ -104,6 +105,19 @@ public class Network {
         return musicApi;
     }
 
+    public static MusicPlayApi getMusicPlayApi(Context context){
+        if (musicPlayApi == null){
+            Retrofit retrofit = new Retrofit.Builder()
+                    .client(getOkHttpClient(context))
+                    .baseUrl("http://tingapi.ting.baidu.com/v1/restserver/")
+                    .addConverterFactory(gsonConverterFactory)
+                    .addCallAdapterFactory(rxJavaCallAdapterFactory)
+                    .build();
+            musicPlayApi = retrofit.create(MusicPlayApi.class);
+        }
+        return musicPlayApi;
+    }
+
     /**
      *  构造okhttp头部(music)
      *
@@ -115,8 +129,8 @@ public class Network {
                     public Response intercept(Chain chain) throws IOException {
                         Request request = chain.request()
                                 .newBuilder()
-                                .removeHeader("User-Agent")//移除旧的
-                                .addHeader("User-Agent", WebSettings.getDefaultUserAgent(context))//添加真正的头部
+                                .removeHeader("User-Agent")
+                                .addHeader("User-Agent", WebSettings.getDefaultUserAgent(context))
                                 .build();
                         return chain.proceed(request);
                     }
