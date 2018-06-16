@@ -2,11 +2,13 @@ package com.example.bibingwei.view.fragments;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -17,12 +19,18 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.bibingwei.MusicDetail;
+import com.example.bibingwei.event.MusicEvent;
+import com.example.bibingwei.view.MainActivity;
 import com.example.bibingwei.view.R;
 import com.example.bibingwei.view.adapter.MusicListAdapter;
 import com.example.bibingwei.view.bean.Music;
 import com.example.bibingwei.view.bean.MusicPlay;
 import com.example.bibingwei.view.network.Network;
 import com.freedom.lauzy.playpauseviewlib.PlayPauseView;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -50,17 +58,20 @@ public class Music_Fragment extends Fragment {
     @BindView(R.id.frontSong)ImageView frontSong;
     @BindView(R.id.play_pause_view)com.freedom.lauzy.playpauseviewlib.PlayPauseView mPlayPauseView;
     @BindView(R.id.nextSong)ImageView nextSong;
+    @BindView(R.id.swipeRefreshLayout) SwipeRefreshLayout mSwipeRefreshLayout;
 
     private List<Music.SongListBean> musicList;
     private MusicListAdapter mMusicListAdapter = new MusicListAdapter();
-    MediaPlayer mMediaPlayer = new MediaPlayer();
+    private MediaPlayer mMediaPlayer = new MediaPlayer();
     private String musicPlayUrl;
     private Map<String,String> params = new HashMap<>();
     private Context mContext ;
+    //第几首歌曲
     private int musicPosition;
+    //歌曲播放时间，暂时为int
     private int musicCurrentPlayPosition = 0;
 
-    private volatile  static Music_Fragment fragment;
+    private volatile static Music_Fragment fragment;
 
     public static Music_Fragment newInstance() {
         if (fragment == null){
@@ -92,6 +103,7 @@ public class Music_Fragment extends Fragment {
         ButterKnife.bind(this,mView);
         songListRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(),1));
         songListRecyclerView.setAdapter(mMusicListAdapter);
+        mSwipeRefreshLayout.setRefreshing(true);
         return mView;
     }
 
@@ -102,12 +114,19 @@ public class Music_Fragment extends Fragment {
         mMusicListAdapter.setClickListener(new MusicListAdapter.OnItemClickListener() {
             @Override
             public void onClick(View view, int position) {
-
                 musicPosition = position;
                 musicCurrentPlayPosition = 0;
                 params.put("method","baidu.ting.song.play");
                 params.put("songid",musicList.get(musicPosition).getSong_id());
                 musicInfo();
+            }
+        });
+
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                mSwipeRefreshLayout.setRefreshing(true);
+                initData();
             }
         });
 
@@ -155,6 +174,17 @@ public class Music_Fragment extends Fragment {
                 params.put("method","baidu.ting.song.play");
                 params.put("songid",musicList.get(musicPosition).getSong_id());
                 musicInfo();
+            }
+        });
+
+        //点击跳转至musicDetailActivity
+        songSmallImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EventBus.getDefault().postSticky(new MusicEvent(musicList));
+                startActivity(new Intent(getContext(), MusicDetail.class)
+                        .putExtra("position",musicPosition)
+                        .putExtra("playPosition",musicCurrentPlayPosition));
             }
         });
     }
@@ -214,6 +244,7 @@ public class Music_Fragment extends Fragment {
                     @Override
                     public void accept(Music music) {
                         musicList = music.getSong_list();
+                        mSwipeRefreshLayout.setRefreshing(false);
                         mMusicListAdapter.setData(musicList);
                     }
                 }, new Consumer<Throwable>() {
@@ -223,4 +254,6 @@ public class Music_Fragment extends Fragment {
                     }
                 });
     }
+
+
 }

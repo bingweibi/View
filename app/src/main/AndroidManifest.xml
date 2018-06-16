@@ -21,7 +21,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.ZhihuDailyDetail" />
-        <activity android:name=".activity.Reading_NewDetail"></activity>
+        <activity android:name=".activity.Reading_NewDetail" />
+        <activity android:name="com.example.bibingwei.MusicDetail"></activity>
     </application>
 
 </manifest>

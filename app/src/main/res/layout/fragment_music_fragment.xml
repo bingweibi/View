@@ -7,26 +7,36 @@
     android:orientation="vertical"
     tools:context=".fragments.Music_Fragment">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/songList"
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefreshLayout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="3"/>
+        android:layout_weight="1"
+        xmlns:android="http://schemas.android.com/apk/res/android">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/songList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </android.support.v4.widget.SwipeRefreshLayout>
+
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="55dp"
+        android:layout_height="60dp"
         android:orientation="horizontal">
-        
+
         <ImageView
             android:id="@+id/songImage"
             android:layout_width="52dp"
             android:layout_height="52dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
-            android:src="@drawable/song"/>
+            android:clickable="true"
+            android:src="@drawable/song"
+            android:focusable="true" />
 
         <LinearLayout
             android:layout_width="0dp"
@@ -48,7 +58,7 @@
                 android:textSize="12sp"
                 android:text="歌手"/>
         </LinearLayout>
-        
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -57,6 +67,7 @@
                 android:id="@+id/frontSong"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
+                android:layout_marginEnd="5dp"
                 android:clickable="true"
                 android:focusable="true"
                 android:layout_gravity="center_vertical"
@@ -75,6 +86,7 @@
                 android:id="@+id/nextSong"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
+                android:layout_marginStart="5dp"
                 android:layout_gravity="center_vertical"
                 android:clickable="true"
                 android:focusable="true"
