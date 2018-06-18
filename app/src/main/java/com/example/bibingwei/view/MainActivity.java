@@ -13,7 +13,7 @@ import android.widget.TextView;
 import com.example.bibingwei.view.fragments.Luck_Fragment;
 import com.example.bibingwei.view.fragments.Music_Fragment;
 import com.example.bibingwei.view.fragments.Reading_Fragment;
-import com.example.bibingwei.view.fragments.Video_fragment;
+import com.example.bibingwei.view.fragments.Video_Fragment;
 
 import qiu.niorgai.StatusBarCompat;
 
@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         readingFragment = Reading_Fragment.newInstance();
         luckFragment = Luck_Fragment.newInstance();
         musicFragment = Music_Fragment.newInstance();
-        videoFragment = Video_fragment.newInstance();
+        videoFragment = Video_Fragment.newInstance();
     }
 
     @Override

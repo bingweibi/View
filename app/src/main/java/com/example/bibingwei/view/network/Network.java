@@ -9,10 +9,12 @@ import com.example.bibingwei.view.network.api.LuckImageApi;
 import com.example.bibingwei.view.network.api.MusicApi;
 import com.example.bibingwei.view.network.api.MusicPlayApi;
 import com.example.bibingwei.view.network.api.OtherApi;
+import com.example.bibingwei.view.network.api.VideoApi;
 import com.example.bibingwei.view.network.api.ZhiHuApi;
 import com.example.bibingwei.view.network.api.ZhiHuDetailApi;
 
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
@@ -36,6 +38,7 @@ public class Network {
     private static LuckImageApi luckImageApi;
     private static MusicApi musicApi;
     private static MusicPlayApi musicPlayApi;
+    private static VideoApi videoApi;
     private static OkHttpClient okHttpClient = new OkHttpClient();
     private static Converter.Factory gsonConverterFactory = GsonConverterFactory.create();
     private static CallAdapter.Factory rxJavaCallAdapterFactory = RxJava2CallAdapterFactory.create();
@@ -67,6 +70,8 @@ public class Network {
     }
 
     public static OtherApi getOtherApi(){
+        okHttpClient.connectTimeoutMillis();
+        okHttpClient.readTimeoutMillis();
         if (otherApi == null){
             Retrofit retrofit = new Retrofit.Builder()
                     .client(okHttpClient)
@@ -116,6 +121,19 @@ public class Network {
             musicPlayApi = retrofit.create(MusicPlayApi.class);
         }
         return musicPlayApi;
+    }
+
+    public static VideoApi getVideoApi(Context context){
+        if (videoApi == null){
+            Retrofit retrofit = new Retrofit.Builder()
+                    .client(okHttpClient)
+                    .baseUrl("http://baobab.kaiyanapp.com/")
+                    .addConverterFactory(gsonConverterFactory)
+                    .addCallAdapterFactory(rxJavaCallAdapterFactory)
+                    .build();
+            videoApi = retrofit.create(VideoApi.class);
+        }
+        return videoApi;
     }
 
     /**

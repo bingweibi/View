@@ -19,7 +19,6 @@ import com.example.bibingwei.view.bean.Music;
 import com.example.bibingwei.view.bean.MusicPlay;
 import com.example.bibingwei.view.network.Network;
 import com.freedom.lauzy.playpauseviewlib.PlayPauseView;
-import com.lauzy.freedom.library.LrcView;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -29,13 +28,13 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
+import me.zhengken.lyricview.LyricView;
 import qiu.niorgai.StatusBarCompat;
 
 /**
@@ -49,7 +48,7 @@ public class MusicDetail extends AppCompatActivity {
     @BindView(R.id.backMusicFragment)ImageView backMusicFragment;
     @BindView(R.id.musicName)TextView musicName;
     @BindView(R.id.musicAuthor)TextView musicAuthor;
-    @BindView(R.id.musicWord)LrcView musicWord;
+    @BindView(R.id.musicWord)LyricView musicWord;
     @BindView(R.id.nowTime)TextView nowTime;
     @BindView(R.id.progressBar)ProgressBar mProgressBar;
     @BindView(R.id.totalTime)TextView totalTime;
@@ -63,6 +62,7 @@ public class MusicDetail extends AppCompatActivity {
     private MediaPlayer mMediaPlayer = new MediaPlayer();
     private Map<String,String> params = new HashMap<>();
     private String musicPlayUrl;
+    //private lyricfile
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -145,9 +145,16 @@ public class MusicDetail extends AppCompatActivity {
     }
 
     @Override
+    protected void onPause() {
+        super.onPause();
+        mMediaPlayer.pause();
+    }
+
+    @Override
     protected void onStop() {
         super.onStop();
         EventBus.getDefault().unregister(this);
+        mMediaPlayer.release();
     }
 
     @Subscribe(sticky = true,threadMode = ThreadMode.MAIN)
