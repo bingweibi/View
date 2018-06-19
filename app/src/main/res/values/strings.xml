@@ -21,4 +21,8 @@
     <string name="front_fragment">yule_fragment</string>
     <string name="joker_fragment">keji_fragment</string>
     <string name="joker">科技</string>
+
+    <string name="title_activity_video_detail">VideoDetail</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
 </resources>

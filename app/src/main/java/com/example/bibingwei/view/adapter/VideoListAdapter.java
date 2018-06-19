@@ -1,5 +1,6 @@
 package com.example.bibingwei.view.adapter;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -9,6 +10,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+import com.example.bibingwei.view.MainActivity;
 import com.example.bibingwei.view.R;
 import com.example.bibingwei.view.bean.Video;
 
@@ -24,6 +27,7 @@ public class VideoListAdapter extends RecyclerView.Adapter<VideoListAdapter.View
 
     private VideoListAdapter.OnItemClickListener mOnItemClickListener;
     private List<Video.ItemListBeanX> mVideoListBeans;
+    private Context mContext;
 
     public void setClickListener(VideoListAdapter.OnItemClickListener clickListener){
         this.mOnItemClickListener = clickListener;
@@ -76,7 +80,8 @@ public class VideoListAdapter extends RecyclerView.Adapter<VideoListAdapter.View
         return mVideoListBeans == null ? 0 : mVideoListBeans.size();
     }
 
-    public void setData(List<Video.ItemListBeanX> videoListBeanList) {
+    public void setData(List<Video.ItemListBeanX> videoListBeanList, Context mContext) {
+        this.mContext = mContext;
         this.mVideoListBeans = videoListBeanList;
         notifyDataSetChanged();
     }

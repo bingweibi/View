@@ -11,7 +11,7 @@ import java.util.List;
  * 传递music播放列表
  */
 public class MusicEvent {
-    public final List<Music.SongListBean> musicList;
+    private final List<Music.SongListBean> musicList;
 
     public MusicEvent(List<Music.SongListBean> musicList) {
         this.musicList = musicList;

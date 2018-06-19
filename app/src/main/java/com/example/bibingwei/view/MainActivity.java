@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
 
         });
         //防止频繁的销毁视图
-        mViewPager.setOffscreenPageLimit(4);
+        mViewPager.setOffscreenPageLimit(1);
     }
 
     private ViewPager.OnPageChangeListener mOnPageChangeListener = new ViewPager.OnPageChangeListener() {

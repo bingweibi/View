@@ -22,7 +22,12 @@
         </activity>
         <activity android:name=".activity.ZhihuDailyDetail" />
         <activity android:name=".activity.Reading_NewDetail" />
-        <activity android:name="com.example.bibingwei.MusicDetail"></activity>
+        <activity android:name=".activity.MusicDetail" />
+        <activity
+            android:name=".activity.VideoDetail"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_video_detail"
+            android:theme="@style/FullscreenTheme"></activity>
     </application>
 
 </manifest>

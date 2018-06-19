@@ -19,9 +19,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.example.bibingwei.MusicDetail;
+import com.example.bibingwei.view.activity.MusicDetail;
 import com.example.bibingwei.event.MusicEvent;
-import com.example.bibingwei.view.MainActivity;
 import com.example.bibingwei.view.R;
 import com.example.bibingwei.view.adapter.MusicListAdapter;
 import com.example.bibingwei.view.bean.Music;
@@ -30,11 +29,9 @@ import com.example.bibingwei.view.network.Network;
 import com.freedom.lauzy.playpauseviewlib.PlayPauseView;
 
 import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -198,6 +195,12 @@ public class Music_Fragment extends Fragment {
     @Override
     public void onStop() {
         super.onStop();
+        mMediaPlayer.stop();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
         mMediaPlayer.release();
     }
 
@@ -254,6 +257,4 @@ public class Music_Fragment extends Fragment {
                     }
                 });
     }
-
-
 }

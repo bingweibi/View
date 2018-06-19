@@ -2,6 +2,8 @@ package com.example.bibingwei.view.fragments;
 
 
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -14,11 +16,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.bibingwei.event.VideoEvent;
 import com.example.bibingwei.view.R;
+import com.example.bibingwei.view.activity.VideoDetail;
 import com.example.bibingwei.view.adapter.VideoListAdapter;
 import com.example.bibingwei.view.bean.Music;
 import com.example.bibingwei.view.bean.Video;
 import com.example.bibingwei.view.network.Network;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,6 +45,7 @@ public class Video_Fragment extends Fragment {
 
     private List<Video.ItemListBeanX> mVideoList = new ArrayList<>();
     private VideoListAdapter mVideoListAdapter = new VideoListAdapter();
+    private Context mContext;
 
     private volatile static Video_Fragment fragment;
 
@@ -82,6 +89,9 @@ public class Video_Fragment extends Fragment {
             @Override
             public void onClick(View view, int position) {
 
+                EventBus.getDefault().postSticky(new VideoEvent(mVideoList));
+                startActivity(new Intent(getActivity(),VideoDetail.class)
+                        .putExtra("position",position));
             }
         });
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -104,10 +114,14 @@ public class Video_Fragment extends Fragment {
                     @Override
                     public void accept(Video video) {
                         for (int i=2;i<video.getItemList().size();i++){
+                            if(video.getItemList().get(i).getData().getCover() == null){
+                                continue;
+                            }
                             mVideoList.add(video.getItemList().get(i));
                         }
                         mSwipeRefreshLayout.setRefreshing(false);
-                        mVideoListAdapter.setData(mVideoList);
+                        mContext = getContext();
+                        mVideoListAdapter.setData(mVideoList,mContext);
                     }
                 }, new Consumer<Throwable>() {
                     @Override

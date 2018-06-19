@@ -1,4 +1,4 @@
-package com.example.bibingwei;
+package com.example.bibingwei.view.activity;
 
 import android.annotation.SuppressLint;
 import android.media.AudioManager;
@@ -153,8 +153,13 @@ public class MusicDetail extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        EventBus.getDefault().unregister(this);
         mMediaPlayer.release();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 
     @Subscribe(sticky = true,threadMode = ThreadMode.MAIN)
