@@ -70,7 +70,14 @@ public class Yule_Fragment extends Fragment {
 
         params.put("type","yule");
         params.put("key","67f32c45c280e80ff8b1efb217d0ddc2");
-        initData();
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser){
+            initData();
+        }
     }
 
     @Override

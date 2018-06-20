@@ -73,13 +73,20 @@ public class Top_Fragment extends Fragment {
     }
 
     @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser){
+            initData();
+        }
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View mView = inflater.inflate(R.layout.fragment_top_fragment, container, false);
         ButterKnife.bind(this,mView);
 
-        initData();
         mRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(),1));
         mRecyclerView.setAdapter(mReadingOtherAdapter);
         mSwipeRefreshLayout.setColorSchemeColors(Color.BLUE, Color.GREEN, Color.RED, Color.YELLOW);

@@ -47,7 +47,7 @@ public class Tiyu_Fragment extends Fragment {
     private Map<String, String> params = new HashMap<>();
     private String newsDetail;
 
-    private volatile  static Tiyu_Fragment fragment;
+    private volatile static Tiyu_Fragment fragment;
 
     public static Tiyu_Fragment newInstance() {
         if (fragment == null){
@@ -70,7 +70,14 @@ public class Tiyu_Fragment extends Fragment {
 
         params.put("type","tiyu");
         params.put("key","67f32c45c280e80ff8b1efb217d0ddc2");
-        initData();
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser){
+            initData();
+        }
     }
 
     @Override

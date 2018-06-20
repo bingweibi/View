@@ -42,7 +42,7 @@ public class ZhiHu_Fragment extends Fragment {
     private ZhiHuAdapter mZhiHuAdapter = new ZhiHuAdapter();
     private List<ZhiHu.StoriesBean> mStoriesBeanList;
 
-    private volatile  static ZhiHu_Fragment fragment;
+    private volatile static ZhiHu_Fragment fragment;
 
     public static ZhiHu_Fragment newInstance() {
         if (fragment == null){
@@ -54,11 +54,18 @@ public class ZhiHu_Fragment extends Fragment {
         }
         return fragment;
     }
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+    }
 
-        initData();
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser){
+            initData();
+        }
     }
 
     @Override
