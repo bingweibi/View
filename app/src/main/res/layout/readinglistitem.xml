@@ -6,8 +6,8 @@
     android:layout_height="wrap_content"
     android:focusable="true"
     android:layout_margin="@dimen/cardview_margin"
-    app:cardCornerRadius="3dp"
-    app:cardElevation="8dp">
+    app:cardCornerRadius="2dp"
+    app:cardElevation="5dp">
 
     <LinearLayout
         android:orientation="horizontal"
@@ -19,7 +19,7 @@
             android:id="@+id/readingListImageItem"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:padding="10dp" />
+            android:padding="8dp" />
         <TextView
             android:id="@+id/readingListTextItem"
             android:layout_width="wrap_content"

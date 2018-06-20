@@ -74,7 +74,6 @@ public class ZhiHuAdapter extends RecyclerView.Adapter<ZhiHuAdapter.ViewHolder>{
         holder.zhihuText.setText(mZhiHuStories.get(position).getTitle());
     }
 
-
     @Override
     public int getItemCount() {
         return mZhiHuStories == null ? 0 : mZhiHuStories.size();

@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.bibingwei.util.GetDateUtil;
 import com.example.bibingwei.view.R;
 import com.example.bibingwei.view.activity.ZhihuDailyDetail;
 import com.example.bibingwei.view.adapter.ZhiHuAdapter;
@@ -40,6 +41,8 @@ public class ZhiHu_Fragment extends Fragment {
 
     private ZhiHuAdapter mZhiHuAdapter = new ZhiHuAdapter();
     private List<ZhiHu.StoriesBean> mStoriesBeanList;
+    private int beforeDate = -1;
+    private String oldDate;
 
     private volatile static ZhiHu_Fragment fragment;
 
@@ -104,6 +107,19 @@ public class ZhiHu_Fragment extends Fragment {
                 initData();
             }
         });
+
+        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+
+                if (! mRecyclerView.canScrollVertically(1)){
+                    oldDate = new GetDateUtil().getDate(beforeDate);
+                    --beforeDate;
+                    getOldData();
+                }
+            }
+        });
     }
 
     @SuppressLint("CheckResult")
@@ -123,6 +139,27 @@ public class ZhiHu_Fragment extends Fragment {
                     @Override
                     public void accept(Throwable throwable) {
                         mSwipeRefreshLayout.setRefreshing(false);
+                        Toast.makeText(getContext(),"加载失败",Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+    @SuppressLint("CheckResult")
+    private void getOldData(){
+        Network.getZhiHuApi()
+                .getOldStoriesInfo(oldDate)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<ZhiHu>(){
+                    @Override
+                    public void accept(ZhiHu zhiHu){
+                        mStoriesBeanList.addAll(zhiHu.getStories());
+                        mZhiHuAdapter.setData(mStoriesBeanList);
+                    }
+                },new Consumer<Throwable>(){
+
+                    @Override
+                    public void accept(Throwable throwable){
                         Toast.makeText(getContext(),"加载失败",Toast.LENGTH_SHORT).show();
                     }
                 });
