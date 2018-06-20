@@ -126,7 +126,6 @@ public class Video_Fragment extends Fragment {
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) {
-                        Log.i("ggg", "accept: "+ throwable.toString());
                         Toast.makeText(getActivity(),throwable.toString(),Toast.LENGTH_LONG).show();
                     }
                 });

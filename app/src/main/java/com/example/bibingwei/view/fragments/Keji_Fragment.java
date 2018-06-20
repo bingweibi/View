@@ -46,7 +46,7 @@ public class Keji_Fragment extends Fragment {
     private List<OtherReading.ResultBean.DataBean> mDataBeans;
     private Map<String, String> params = new HashMap<>();
     private String newsDetail;
-    private volatile  static Keji_Fragment fragment;
+    private volatile static Keji_Fragment fragment;
 
     public static Keji_Fragment newInstance() {
         if (fragment == null){
@@ -119,16 +119,16 @@ public class Keji_Fragment extends Fragment {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<OtherReading>() {
                     @Override
-                    public void accept(OtherReading otherReading) throws Exception {
+                    public void accept(OtherReading otherReading) {
                         mSwipeRefreshLayout.setRefreshing(false);
                         mDataBeans = otherReading.getResult().getData();
                         mReadingOtherAdapter.setData(mDataBeans);
                     }
                 }, new Consumer<Throwable>() {
                     @Override
-                    public void accept(Throwable throwable) throws Exception {
+                    public void accept(Throwable throwable) {
                         mSwipeRefreshLayout.setRefreshing(false);
-                        Toast.makeText(getContext(),"我们都是局外人!",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(),"余额不足，请充值",Toast.LENGTH_SHORT).show();
                     }
                 });
     }

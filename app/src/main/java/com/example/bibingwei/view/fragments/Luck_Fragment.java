@@ -96,26 +96,6 @@ public class Luck_Fragment extends Fragment {
                 Toast.makeText(getContext(),"不提供保存，谢谢！",Toast.LENGTH_SHORT).show();
             }
         });
-
-//        mDiscreteScrollView.addScrollStateChangeListener(new DiscreteScrollView.ScrollStateChangeListener<RecyclerView.ViewHolder>() {
-//            @Override
-//            public void onScrollStart(@NonNull RecyclerView.ViewHolder currentItemHolder, int adapterPosition) {
-////                Toast.makeText(getContext(),""+adapterPosition,Toast.LENGTH_SHORT).show();
-////                if (adapterPosition % 8 ==0 && adapterPosition>0){
-////                    initData(++num);
-////                }
-//            }
-//
-//            @Override
-//            public void onScrollEnd(@NonNull RecyclerView.ViewHolder currentItemHolder, int adapterPosition) {
-//
-//            }
-//
-//            @Override
-//            public void onScroll(float scrollPosition, int currentPosition, int newPosition, @Nullable RecyclerView.ViewHolder currentHolder, @Nullable RecyclerView.ViewHolder newCurrent) {
-//
-//            }
-//        });
     }
 
     @SuppressLint("CheckResult")

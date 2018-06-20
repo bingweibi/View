@@ -31,7 +31,6 @@ public class ZhihuDailyDetail extends AppCompatActivity {
 
     @BindView(R.id.dailyContentImage) ImageView mImageView;
     @BindView(R.id.toolBar) android.support.v7.widget.Toolbar mToolbar;
-    @BindView(R.id.comments) FloatingActionButton mFloatingActionButton;
     @BindView(R.id.contentText) WebView mWebView;
 
     private int zhihuDailyID;
@@ -53,12 +52,6 @@ public class ZhihuDailyDetail extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        mFloatingActionButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
         mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

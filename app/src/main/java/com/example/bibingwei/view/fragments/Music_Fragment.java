@@ -63,9 +63,9 @@ public class Music_Fragment extends Fragment {
     private String musicPlayUrl;
     private Map<String,String> params = new HashMap<>();
     private Context mContext ;
-    //第几首歌曲
+    /**第几首歌曲*/
     private int musicPosition;
-    //歌曲播放时间，暂时为int
+    /**歌曲播放时间，暂时为int*/
     private int musicCurrentPlayPosition = 0;
 
     private volatile static Music_Fragment fragment;

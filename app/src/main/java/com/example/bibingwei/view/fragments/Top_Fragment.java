@@ -120,16 +120,16 @@ public class Top_Fragment extends Fragment {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<OtherReading>() {
                     @Override
-                    public void accept(OtherReading otherReading) throws Exception {
+                    public void accept(OtherReading otherReading) {
                         mSwipeRefreshLayout.setRefreshing(false);
                         mDataBeans = otherReading.getResult().getData();
                         mReadingOtherAdapter.setData(mDataBeans);
                     }
                 }, new Consumer<Throwable>() {
                     @Override
-                    public void accept(Throwable throwable) throws Exception {
+                    public void accept(Throwable throwable) {
                         mSwipeRefreshLayout.setRefreshing(false);
-                        Toast.makeText(getContext(),"请及时补充能量!",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(),"程序员加紧修补中",Toast.LENGTH_SHORT).show();
                     }
                 });
     }

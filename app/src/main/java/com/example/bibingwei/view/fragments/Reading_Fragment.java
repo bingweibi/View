@@ -94,7 +94,7 @@ public class Reading_Fragment extends Fragment {
                 return 5;
             }
         });
-        readingViewPager.setOffscreenPageLimit(5);
+        readingViewPager.setOffscreenPageLimit(1);
     }
 
     private ViewPager.OnPageChangeListener mOnPageChangeListener = new ViewPager.OnPageChangeListener() {

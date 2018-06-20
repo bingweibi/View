@@ -3,7 +3,6 @@ package com.example.bibingwei.view.activity;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.view.ViewGroup;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
