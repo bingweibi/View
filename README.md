@@ -7,10 +7,10 @@
 阅读包括知乎日报、头条新闻、科技、娱乐、体育
 
 # 效果图
-<img src="/ScreenShot/reading.gif" alt="screenshot" title="screenshot1" width="270" height="460" />  
-<img src="/ScreenShot/luck.gif" alt="screenshot" title="screenshot2" width="270" height="460" /> 
-<img src="/ScreenShot/music.gif" alt="screenshot" title="screenshot3" width="270" height="460" /> 
-<img src="/ScreenShot/video.gif" alt="screenshot" title="screenshot4" width="270" height="460" /> 
+![](http://p2g00vblr.bkt.clouddn.com/reading.gif) 
+![](http://p2g00vblr.bkt.clouddn.com/luck.gif) 
+![](http://p2g00vblr.bkt.clouddn.com/music.gif) 
+![](http://p2g00vblr.bkt.clouddn.com/video.gif)
 
 # 感谢
 - [RxJava](https://github.com/ReactiveX/RxJava)、[Retrofit](https://github.com/square/retrofit)、
