@@ -1,6 +1,6 @@
 package com.example.bibingwei.event;
 
-import com.example.bibingwei.view.bean.Video;
+import com.example.bibingwei.bean.Video;
 
 import java.util.List;
 

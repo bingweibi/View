@@ -10,8 +10,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.bibingwei.view.R;
-import com.example.bibingwei.view.bean.OtherReading;
-import com.example.bibingwei.view.bean.ZhiHu;
+import com.example.bibingwei.bean.OtherReading;
 
 import java.util.List;
 

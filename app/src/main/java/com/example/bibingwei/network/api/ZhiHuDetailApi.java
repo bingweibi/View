@@ -1,6 +1,6 @@
-package com.example.bibingwei.view.network.api;
+package com.example.bibingwei.network.api;
 
-import com.example.bibingwei.view.bean.ZhiHuDetail;
+import com.example.bibingwei.bean.ZhiHuDetail;
 
 import io.reactivex.Observable;
 import retrofit2.http.GET;

@@ -3,6 +3,7 @@ package com.example.bibingwei.view.fragments;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -23,9 +24,9 @@ import com.example.bibingwei.view.activity.MusicDetail;
 import com.example.bibingwei.event.MusicEvent;
 import com.example.bibingwei.view.R;
 import com.example.bibingwei.view.adapter.MusicListAdapter;
-import com.example.bibingwei.view.bean.Music;
-import com.example.bibingwei.view.bean.MusicPlay;
-import com.example.bibingwei.view.network.Network;
+import com.example.bibingwei.bean.Music;
+import com.example.bibingwei.bean.MusicPlay;
+import com.example.bibingwei.network.Network;
 import com.freedom.lauzy.playpauseviewlib.PlayPauseView;
 
 import org.greenrobot.eventbus.EventBus;
@@ -107,7 +108,13 @@ public class Music_Fragment extends Fragment {
         ButterKnife.bind(this,mView);
         songListRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(),1));
         songListRecyclerView.setAdapter(mMusicListAdapter);
-        mSwipeRefreshLayout.setRefreshing(true);
+        mSwipeRefreshLayout.setColorSchemeColors(Color.BLUE, Color.GREEN, Color.RED, Color.YELLOW);
+        mSwipeRefreshLayout.setDistanceToTriggerSync(250);
+        mSwipeRefreshLayout.setProgressBackgroundColorSchemeColor(Color.WHITE);
+        mSwipeRefreshLayout.setSize(SwipeRefreshLayout.LARGE);
+        if (musicList == null){
+            mSwipeRefreshLayout.setRefreshing(true);
+        }
         return mView;
     }
 

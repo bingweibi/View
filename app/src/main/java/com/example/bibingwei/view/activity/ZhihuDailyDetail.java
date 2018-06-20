@@ -1,9 +1,7 @@
 package com.example.bibingwei.view.activity;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.graphics.Color;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -14,8 +12,8 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.example.bibingwei.util.HtmlUtil;
 import com.example.bibingwei.view.R;
-import com.example.bibingwei.view.bean.ZhiHuDetail;
-import com.example.bibingwei.view.network.Network;
+import com.example.bibingwei.bean.ZhiHuDetail;
+import com.example.bibingwei.network.Network;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

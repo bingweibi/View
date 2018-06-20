@@ -1,26 +1,22 @@
-package com.example.bibingwei.view.network;
+package com.example.bibingwei.network;
 
 import android.content.Context;
-import android.os.Build;
 import android.webkit.WebSettings;
 
-import com.example.bibingwei.view.bean.Music;
-import com.example.bibingwei.view.network.api.LuckImageApi;
-import com.example.bibingwei.view.network.api.MusicApi;
-import com.example.bibingwei.view.network.api.MusicPlayApi;
-import com.example.bibingwei.view.network.api.OtherApi;
-import com.example.bibingwei.view.network.api.VideoApi;
-import com.example.bibingwei.view.network.api.ZhiHuApi;
-import com.example.bibingwei.view.network.api.ZhiHuDetailApi;
+import com.example.bibingwei.network.api.LuckImageApi;
+import com.example.bibingwei.network.api.MusicApi;
+import com.example.bibingwei.network.api.MusicPlayApi;
+import com.example.bibingwei.network.api.OtherApi;
+import com.example.bibingwei.network.api.VideoApi;
+import com.example.bibingwei.network.api.ZhiHuApi;
+import com.example.bibingwei.network.api.ZhiHuDetailApi;
 
 import java.io.IOException;
-import java.util.concurrent.TimeUnit;
 
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
-import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.CallAdapter;
 import retrofit2.Converter;
 import retrofit2.Retrofit;

@@ -10,10 +10,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
-import com.example.bibingwei.view.MainActivity;
 import com.example.bibingwei.view.R;
-import com.example.bibingwei.view.bean.Video;
+import com.example.bibingwei.bean.Video;
 
 import java.util.List;
 

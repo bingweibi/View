@@ -15,9 +15,9 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.bibingwei.event.MusicEvent;
 import com.example.bibingwei.view.R;
-import com.example.bibingwei.view.bean.Music;
-import com.example.bibingwei.view.bean.MusicPlay;
-import com.example.bibingwei.view.network.Network;
+import com.example.bibingwei.bean.Music;
+import com.example.bibingwei.bean.MusicPlay;
+import com.example.bibingwei.network.Network;
 import com.freedom.lauzy.playpauseviewlib.PlayPauseView;
 
 import org.greenrobot.eventbus.EventBus;

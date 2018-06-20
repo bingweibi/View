@@ -2,12 +2,9 @@ package com.example.bibingwei.view.fragments;
 
 
 import android.annotation.SuppressLint;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,8 +12,8 @@ import android.widget.Toast;
 
 import com.example.bibingwei.view.R;
 import com.example.bibingwei.view.adapter.LuckImageAdapter;
-import com.example.bibingwei.view.bean.LuckImage;
-import com.example.bibingwei.view.network.Network;
+import com.example.bibingwei.bean.LuckImage;
+import com.example.bibingwei.network.Network;
 import com.yarolegovich.discretescrollview.DSVOrientation;
 import com.yarolegovich.discretescrollview.DiscreteScrollView;
 import com.yarolegovich.discretescrollview.transform.Pivot;
@@ -29,7 +26,6 @@ import butterknife.ButterKnife;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
-import qiu.niorgai.StatusBarCompat;
 
 /**
  * A simple {@link Fragment} subclass.

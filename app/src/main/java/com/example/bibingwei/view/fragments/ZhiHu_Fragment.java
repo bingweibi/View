@@ -18,8 +18,8 @@ import android.widget.Toast;
 import com.example.bibingwei.view.R;
 import com.example.bibingwei.view.activity.ZhihuDailyDetail;
 import com.example.bibingwei.view.adapter.ZhiHuAdapter;
-import com.example.bibingwei.view.bean.ZhiHu;
-import com.example.bibingwei.view.network.Network;
+import com.example.bibingwei.bean.ZhiHu;
+import com.example.bibingwei.network.Network;
 
 import java.util.List;
 
@@ -28,7 +28,6 @@ import butterknife.ButterKnife;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
-import qiu.niorgai.StatusBarCompat;
 
 /**
  * A simple {@link Fragment} subclass.

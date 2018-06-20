@@ -1,8 +1,6 @@
 package com.example.bibingwei.event;
 
-import com.example.bibingwei.view.bean.Music;
-
-import org.greenrobot.eventbus.Subscribe;
+import com.example.bibingwei.bean.Music;
 
 import java.util.List;
 

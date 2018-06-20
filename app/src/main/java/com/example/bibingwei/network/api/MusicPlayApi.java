@@ -1,6 +1,6 @@
-package com.example.bibingwei.view.network.api;
+package com.example.bibingwei.network.api;
 
-import com.example.bibingwei.view.bean.MusicPlay;
+import com.example.bibingwei.bean.MusicPlay;
 
 import java.util.Map;
 

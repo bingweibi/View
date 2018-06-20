@@ -1,12 +1,11 @@
-package com.example.bibingwei.view.network.api;
+package com.example.bibingwei.network.api;
 
-import com.example.bibingwei.view.bean.OtherReading;
+import com.example.bibingwei.bean.OtherReading;
 
 import java.util.Map;
 
 import io.reactivex.Observable;
 import retrofit2.http.GET;
-import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
 
 /**

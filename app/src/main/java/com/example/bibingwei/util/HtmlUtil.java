@@ -1,6 +1,6 @@
 package com.example.bibingwei.util;
 
-import com.example.bibingwei.view.bean.ZhiHuDetail;
+import com.example.bibingwei.bean.ZhiHuDetail;
 
 import java.util.List;
 

@@ -4,13 +4,13 @@ package com.example.bibingwei.view.fragments;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,9 +20,8 @@ import com.example.bibingwei.event.VideoEvent;
 import com.example.bibingwei.view.R;
 import com.example.bibingwei.view.activity.VideoDetail;
 import com.example.bibingwei.view.adapter.VideoListAdapter;
-import com.example.bibingwei.view.bean.Music;
-import com.example.bibingwei.view.bean.Video;
-import com.example.bibingwei.view.network.Network;
+import com.example.bibingwei.bean.Video;
+import com.example.bibingwei.network.Network;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -83,6 +82,10 @@ public class Video_Fragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_video_fragment, container, false);
         ButterKnife.bind(this,view);
+        mSwipeRefreshLayout.setColorSchemeColors(Color.BLUE, Color.GREEN, Color.RED, Color.YELLOW);
+        mSwipeRefreshLayout.setDistanceToTriggerSync(250);
+        mSwipeRefreshLayout.setProgressBackgroundColorSchemeColor(Color.WHITE);
+        mSwipeRefreshLayout.setSize(SwipeRefreshLayout.LARGE);
         videoListRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(),1));
         videoListRecyclerView.setAdapter(mVideoListAdapter);
         mSwipeRefreshLayout.setRefreshing(true);

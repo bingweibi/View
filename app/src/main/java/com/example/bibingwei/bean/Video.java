@@ -1,4 +1,4 @@
-package com.example.bibingwei.view.bean;
+package com.example.bibingwei.bean;
 
 import java.util.List;
 
