@@ -26,6 +26,8 @@ public class Reading_Fragment extends Fragment {
     private Fragment zhihuFragment, topFragment, tiyuFragment, yuleFragment, kejiFragment;
     private BottomNavigationView mBottomNavigationView;
     private volatile  static Reading_Fragment fragment;
+    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener;
+    private ViewPager.OnPageChangeListener mOnPageChangeListener;
 
     public static Reading_Fragment newInstance() {
         if (fragment == null){
@@ -63,18 +65,17 @@ public class Reading_Fragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
+        zhihuFragment = ZhiHu_Fragment.newInstance();
+        topFragment = Top_Fragment.newInstance();
+        tiyuFragment = Tiyu_Fragment.newInstance();
+        yuleFragment = Yule_Fragment.newInstance();
+        kejiFragment = Keji_Fragment.newInstance();
     }
 
     @Override
     public void onResume() {
         super.onResume();
 
-        Log.d("------", "ReadingFragment onResume: ");
-        zhihuFragment = ZhiHu_Fragment.newInstance();
-        topFragment = Top_Fragment.newInstance();
-        tiyuFragment = Tiyu_Fragment.newInstance();
-        yuleFragment = Yule_Fragment.newInstance();
-        kejiFragment = Keji_Fragment.newInstance();
         readingViewPager.setAdapter(new FragmentPagerAdapter(getChildFragmentManager()) {
             @Override
             public Fragment getItem(int position) {
@@ -100,53 +101,46 @@ public class Reading_Fragment extends Fragment {
             }
         });
         readingViewPager.setOffscreenPageLimit(5);
-        Log.i("------", "readingFragment onPageSelected: " + readingViewPager.getCurrentItem());
+
+        mOnNavigationItemSelectedListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
+
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                readingViewPager.setCurrentItem(item.getOrder());
+                return true;
+            }
+        };
+
+        mOnPageChangeListener = new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                mBottomNavigationView.getMenu().getItem(position).setChecked(true);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        };
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        Log.i("------", "readingFragment onStop: ");
     }
-
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        Log.i("------", "readingFragment onDestroyView: ");
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        Log.i("------", "readingFragment onDestroy: ");
     }
-
-    private ViewPager.OnPageChangeListener mOnPageChangeListener = new ViewPager.OnPageChangeListener() {
-        @Override
-        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-        }
-
-        @Override
-        public void onPageSelected(int position) {
-            mBottomNavigationView.getMenu().getItem(position).setChecked(true);
-        }
-
-        @Override
-        public void onPageScrollStateChanged(int state) {
-
-        }
-
-    };
-
-    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-            = new BottomNavigationView.OnNavigationItemSelectedListener() {
-
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            readingViewPager.setCurrentItem(item.getOrder());
-            return true;
-        }
-    };
 }

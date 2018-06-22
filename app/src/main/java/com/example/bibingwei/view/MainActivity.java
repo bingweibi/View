@@ -1,18 +1,18 @@
 package com.example.bibingwei.view;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuItem;
-import android.view.ViewGroup;
+import android.view.MotionEvent;
+import android.view.View;
 import android.widget.TextView;
 
 import com.example.bibingwei.view.fragments.Luck_Fragment;
@@ -22,6 +22,8 @@ import com.example.bibingwei.view.fragments.Video_Fragment;
 
 import java.util.Objects;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import qiu.niorgai.StatusBarCompat;
 
 /**
@@ -29,24 +31,26 @@ import qiu.niorgai.StatusBarCompat;
  */
 public class MainActivity extends AppCompatActivity {
 
-    private ViewPager mViewPager;
+    @BindView(R.id.fragment_container) ViewPager mViewPager;
     private Fragment readingFragment,luckFragment,musicFragment,videoFragment;
-    private BottomNavigationView navigation;
-    private TextView titleView;
+    @BindView(R.id.navigation) BottomNavigationView navigation;
+    @BindView(R.id.title) TextView titleView;
+    private FragmentPagerAdapter mPagerAdapter;
+    private ViewPager.OnPageChangeListener mOnPageChangeListener;
+    private int temp = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        ButterKnife.bind(this);
+
         //透明状态栏
         StatusBarCompat.translucentStatusBar(this);
         //SDK >= 21时, 取消状态栏的阴影
         StatusBarCompat.translucentStatusBar(this,false);
-        titleView = findViewById(R.id.title);
-        mViewPager = findViewById(R.id.fragment_container);
         mViewPager.addOnPageChangeListener(mOnPageChangeListener);
-        navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
     }
 
@@ -61,10 +65,20 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 3 && resultCode == 3){
+            Log.i("------", "CurrentItem: " + mViewPager.getCurrentItem());
+            temp = 3;
+        }
+    }
+
+    @SuppressLint("ClickableViewAccessibility")
+    @Override
     protected void onResume() {
         super.onResume();
 
-        mViewPager.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
+        mPagerAdapter = new FragmentPagerAdapter(getSupportFragmentManager()) {
             @Override
             public Fragment getItem(int position) {
                 switch (position){
@@ -85,11 +99,42 @@ public class MainActivity extends AppCompatActivity {
             public int getCount() {
                 return 4;
             }
-        });
+        };
+        mViewPager.setAdapter(mPagerAdapter);
         //防止频繁的销毁视图
         mViewPager.setOffscreenPageLimit(4);
 
-        Log.i("------", "MainActivity onPageSelected: " + mViewPager.getCurrentItem());
+        mViewPager.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return true;
+            }
+        });
+
+        if (temp != 0){
+            mViewPager.setCurrentItem(temp);
+            mOnPageChangeListener.onPageSelected(temp);
+        }
+
+        Log.i("------", "getCurrentItem: " + mViewPager.getCurrentItem());
+
+        mOnPageChangeListener = new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                titleView.setText(navigation.getMenu().getItem(position).getTitle());
+                navigation.getMenu().getItem(position).setChecked(true);
+                Log.i("------", "onPageSelected: " + position);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        };
     }
 
     @Override
@@ -101,23 +146,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
     }
-
-    private ViewPager.OnPageChangeListener mOnPageChangeListener = new ViewPager.OnPageChangeListener() {
-        @Override
-        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-        }
-
-        @Override
-        public void onPageSelected(int position) {
-            titleView.setText(navigation.getMenu().getItem(position).getTitle());
-            navigation.getMenu().getItem(position).setChecked(true);
-        }
-
-        @Override
-        public void onPageScrollStateChanged(int state) {
-
-        }
-    };
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {

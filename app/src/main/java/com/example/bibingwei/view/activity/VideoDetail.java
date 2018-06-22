@@ -65,8 +65,6 @@ public class VideoDetail extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_video_detail);
 
-        Log.i("------", "videoDetail onCreate: ");
-
         EventBus.getDefault().register(this);
         ButterKnife.bind(this);
         //透明状态栏
@@ -173,6 +171,15 @@ public class VideoDetail extends AppCompatActivity {
         EventBus.getDefault().unregister(this);
         player.release();
         super.onDestroy();
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0){
+            setResult(3);
+            finish();
+        }
+        return false;
     }
 
     private void playVideo(Video.ItemListBeanX listBeanX) {

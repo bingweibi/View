@@ -61,12 +61,12 @@ public class ZhiHu_Fragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.d("------", "zhihuFragment   onCreate: ");
     }
 
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
+        Log.i("------", "zhihuFragment visible: " + isVisibleToUser);
         if (isVisibleToUser){
             initData();
         }
@@ -77,8 +77,6 @@ public class ZhiHu_Fragment extends Fragment {
                              Bundle savedInstanceState) {
         View mView = inflater.inflate(R.layout.fragment_zhihu_fragment, container, false);
         ButterKnife.bind(this,mView);
-
-        Log.d("------", "zhihuFragment   onCreateView: ");
 
         mRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(),1));
         mRecyclerView.setAdapter(mZhiHuAdapter);
@@ -96,7 +94,6 @@ public class ZhiHu_Fragment extends Fragment {
     public void onResume() {
         super.onResume();
 
-        Log.d("------", "zhihuFragment   onResume ");
         mZhiHuAdapter.setClickListener(new ZhiHuAdapter.OnItemClickListener() {
             @Override
             public void onClick(View view, int position) {
@@ -131,7 +128,6 @@ public class ZhiHu_Fragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        Log.d("------", "zhihuFragment onDestroyView: ");
     }
 
     @SuppressLint("CheckResult")

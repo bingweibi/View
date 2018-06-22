@@ -20,7 +20,7 @@
         android:textColor="#fff"
         android:background="@color/colorPrimaryDark" />
 
-    <com.example.bibingwei.view.view.NoScrollViewPager
+    <android.support.v4.view.ViewPager
         android:id="@+id/fragment_container"
         android:layout_width="match_parent"
         android:layout_height="0dp"

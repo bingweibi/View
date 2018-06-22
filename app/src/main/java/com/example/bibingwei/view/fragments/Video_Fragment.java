@@ -86,7 +86,6 @@ public class Video_Fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        Log.d("------", "videoFragment onCreateView: ");
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_video_fragment, container, false);
         ButterKnife.bind(this,view);
@@ -108,13 +107,13 @@ public class Video_Fragment extends Fragment {
             Log.i("------", "videoFragment visible: ");
             initData();
         }
-        Log.d("------", "videoFragment onResume: ");
+
         mVideoListAdapter.setClickListener(new VideoListAdapter.OnItemClickListener() {
             @Override
             public void onClick(View view, int position) {
 
                 EventBus.getDefault().postSticky(new VideoEvent(mVideoList));
-                startActivity(new Intent(getActivity(),VideoDetail.class).putExtra("position",position));
+                getActivity().startActivityForResult(new Intent(getActivity(),VideoDetail.class).putExtra("position",position),3);
             }
         });
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
