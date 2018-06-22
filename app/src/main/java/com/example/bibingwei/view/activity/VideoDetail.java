@@ -2,6 +2,7 @@ package com.example.bibingwei.view.activity;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.bibingwei.event.VideoEvent;
+import com.example.bibingwei.view.MainActivity;
 import com.example.bibingwei.view.R;
 import com.example.bibingwei.bean.Video;
 import com.google.android.exoplayer2.ExoPlaybackException;
@@ -168,11 +170,9 @@ public class VideoDetail extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
-        super.onDestroy();
         EventBus.getDefault().unregister(this);
         player.release();
-        VideoDetail.this.finish();
-        Log.i("------", "videoDetail onDestroy: ");
+        super.onDestroy();
     }
 
     private void playVideo(Video.ItemListBeanX listBeanX) {

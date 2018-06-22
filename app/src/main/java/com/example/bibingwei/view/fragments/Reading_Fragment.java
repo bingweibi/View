@@ -100,6 +100,7 @@ public class Reading_Fragment extends Fragment {
             }
         });
         readingViewPager.setOffscreenPageLimit(5);
+        Log.i("------", "readingFragment onPageSelected: " + readingViewPager.getCurrentItem());
     }
 
     @Override

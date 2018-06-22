@@ -2,10 +2,12 @@ package com.example.bibingwei.view;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -37,8 +39,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Log.i("------", "mainActivity onCreate: ");
-
         //透明状态栏
         StatusBarCompat.translucentStatusBar(this);
         //SDK >= 21时, 取消状态栏的阴影
@@ -53,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+
         readingFragment = Reading_Fragment.newInstance();
         luckFragment = Luck_Fragment.newInstance();
         musicFragment = Music_Fragment.newInstance();
@@ -87,18 +88,18 @@ public class MainActivity extends AppCompatActivity {
         });
         //防止频繁的销毁视图
         mViewPager.setOffscreenPageLimit(4);
+
+        Log.i("------", "MainActivity onPageSelected: " + mViewPager.getCurrentItem());
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        Log.i("------", "MainActivity onStop: ");
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        Log.i("------", "MainActivity onDestroy: ");
     }
 
     private ViewPager.OnPageChangeListener mOnPageChangeListener = new ViewPager.OnPageChangeListener() {
@@ -124,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             mViewPager.setCurrentItem(item.getOrder());
-            return false;
+            return true;
         }
     };
 }
