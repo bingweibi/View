@@ -58,6 +58,12 @@ public class ZhihuDailyDetail extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        ZhihuDailyDetail.this.finish();
+    }
+
     @SuppressLint("CheckResult")
     private void getData() {
         Network.getZhiHuDetailApi()

@@ -11,6 +11,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,6 +28,7 @@ import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -45,6 +47,7 @@ public class Video_Fragment extends Fragment {
     private List<Video.ItemListBeanX> mVideoList = new ArrayList<>();
     private VideoListAdapter mVideoListAdapter = new VideoListAdapter();
     private Context mContext;
+    private boolean isVisible;
 
     private volatile static Video_Fragment fragment;
 
@@ -66,12 +69,16 @@ public class Video_Fragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.i("------", "videoFragment onCreate: ");
     }
 
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
-        if (isVisibleToUser){
+
+        Log.i("------", "videoFragment visible: " + isVisibleToUser);
+        isVisible = isVisibleToUser;
+        if (isVisible){
             initData();
         }
     }
@@ -79,6 +86,8 @@ public class Video_Fragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        Log.d("------", "videoFragment onCreateView: ");
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_video_fragment, container, false);
         ButterKnife.bind(this,view);
@@ -95,13 +104,19 @@ public class Video_Fragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+
+        if (isVisible){
+            Log.i("------", "videoFragment visible: ");
+            initData();
+        }
+        Log.d("------", "videoFragment onResume: ");
         mVideoListAdapter.setClickListener(new VideoListAdapter.OnItemClickListener() {
             @Override
             public void onClick(View view, int position) {
 
                 EventBus.getDefault().postSticky(new VideoEvent(mVideoList));
-                startActivity(new Intent(getActivity(),VideoDetail.class)
-                        .putExtra("position",position));
+                Objects.requireNonNull(getActivity()).startActivityForResult(new Intent(getActivity(),VideoDetail.class)
+                        .putExtra("position",position),3);
             }
         });
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -111,6 +126,24 @@ public class Video_Fragment extends Fragment {
                 initData();
             }
         });
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        Log.i("------", "videoFragment onStop: ");
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        Log.i("------", "videoFragment onDestroyView: ");
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Log.i("------", "videoFragment onDestroy: ");
     }
 
     @SuppressLint("CheckResult")

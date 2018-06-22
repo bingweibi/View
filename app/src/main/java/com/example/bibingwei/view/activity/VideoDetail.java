@@ -5,6 +5,8 @@ import android.content.Context;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
@@ -60,6 +62,8 @@ public class VideoDetail extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_video_detail);
+
+        Log.i("------", "videoDetail onCreate: ");
 
         EventBus.getDefault().register(this);
         ButterKnife.bind(this);
@@ -167,6 +171,8 @@ public class VideoDetail extends AppCompatActivity {
         super.onDestroy();
         EventBus.getDefault().unregister(this);
         player.release();
+        VideoDetail.this.finish();
+        Log.i("------", "videoDetail onDestroy: ");
     }
 
     private void playVideo(Video.ItemListBeanX listBeanX) {

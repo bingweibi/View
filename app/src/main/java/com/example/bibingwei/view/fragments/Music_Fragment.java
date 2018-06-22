@@ -32,6 +32,7 @@ import com.freedom.lauzy.playpauseviewlib.PlayPauseView;
 import org.greenrobot.eventbus.EventBus;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -58,7 +59,7 @@ public class Music_Fragment extends Fragment {
     @BindView(R.id.nextSong)ImageView nextSong;
     @BindView(R.id.swipeRefreshLayout) SwipeRefreshLayout mSwipeRefreshLayout;
 
-    private List<Music.SongListBean> musicList;
+    private List<Music.SongListBean> musicList = new ArrayList<>();
     private MusicListAdapter mMusicListAdapter = new MusicListAdapter();
     private MediaPlayer mMediaPlayer = new MediaPlayer();
     private String musicPlayUrl;

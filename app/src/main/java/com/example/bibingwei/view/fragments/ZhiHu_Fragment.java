@@ -10,6 +10,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -60,6 +61,7 @@ public class ZhiHu_Fragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.d("------", "zhihuFragment   onCreate: ");
     }
 
     @Override
@@ -76,6 +78,8 @@ public class ZhiHu_Fragment extends Fragment {
         View mView = inflater.inflate(R.layout.fragment_zhihu_fragment, container, false);
         ButterKnife.bind(this,mView);
 
+        Log.d("------", "zhihuFragment   onCreateView: ");
+
         mRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(),1));
         mRecyclerView.setAdapter(mZhiHuAdapter);
         mSwipeRefreshLayout.setColorSchemeColors(Color.BLUE, Color.GREEN, Color.RED, Color.YELLOW);
@@ -91,6 +95,8 @@ public class ZhiHu_Fragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+
+        Log.d("------", "zhihuFragment   onResume ");
         mZhiHuAdapter.setClickListener(new ZhiHuAdapter.OnItemClickListener() {
             @Override
             public void onClick(View view, int position) {
@@ -120,6 +126,12 @@ public class ZhiHu_Fragment extends Fragment {
                 }
             }
         });
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        Log.d("------", "zhihuFragment onDestroyView: ");
     }
 
     @SuppressLint("CheckResult")

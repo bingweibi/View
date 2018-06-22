@@ -19,6 +19,7 @@ import com.yarolegovich.discretescrollview.DiscreteScrollView;
 import com.yarolegovich.discretescrollview.transform.Pivot;
 import com.yarolegovich.discretescrollview.transform.ScaleTransformer;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -37,7 +38,7 @@ public class Luck_Fragment extends Fragment {
     DiscreteScrollView mDiscreteScrollView;
 
     private LuckImageAdapter mLuckImageAdapter = new LuckImageAdapter();
-    private List<LuckImage.ResultsBean> mResultsBeanList;
+    private List<LuckImage.ResultsBean> mResultsBeanList = new ArrayList<>();
     private int num = 1;
 
     private volatile  static Luck_Fragment fragment;

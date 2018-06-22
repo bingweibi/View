@@ -21,6 +21,7 @@ import com.example.bibingwei.view.adapter.ReadingOtherAdapter;
 import com.example.bibingwei.bean.OtherReading;
 import com.example.bibingwei.network.Network;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -42,7 +43,7 @@ public class Yule_Fragment extends Fragment {
     @BindView(R.id.readingSwipeRefreshLayout)SwipeRefreshLayout mSwipeRefreshLayout;
 
     private ReadingOtherAdapter mReadingOtherAdapter = new ReadingOtherAdapter();
-    private List<OtherReading.ResultBean.DataBean> mDataBeans;
+    private List<OtherReading.ResultBean.DataBean> mDataBeans = new ArrayList<>();
     private Map<String, String> params = new HashMap<>();
     private String newsDetail;
 

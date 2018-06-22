@@ -1,7 +1,6 @@
 package com.example.bibingwei.view.fragments;
 
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -9,14 +8,13 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.bibingwei.view.R;
-
-import qiu.niorgai.StatusBarCompat;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -25,7 +23,7 @@ import qiu.niorgai.StatusBarCompat;
 public class Reading_Fragment extends Fragment {
 
     private ViewPager readingViewPager;
-    private Fragment zhihuFragment,androidFragment,iosFragment,frontFragment,jokerFragment;
+    private Fragment zhihuFragment, topFragment, tiyuFragment, yuleFragment, kejiFragment;
     private BottomNavigationView mBottomNavigationView;
     private volatile  static Reading_Fragment fragment;
 
@@ -47,7 +45,7 @@ public class Reading_Fragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        Log.i("------", "readingFragment onCreate: ");
     }
 
     @Override
@@ -59,17 +57,24 @@ public class Reading_Fragment extends Fragment {
         readingViewPager.addOnPageChangeListener(mOnPageChangeListener);
         mBottomNavigationView = view.findViewById(R.id.reading_container);
         mBottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-        zhihuFragment = ZhiHu_Fragment.newInstance();
-        androidFragment = Top_Fragment.newInstance();
-        iosFragment = Tiyu_Fragment.newInstance();
-        frontFragment = Yule_Fragment.newInstance();
-        jokerFragment = Keji_Fragment.newInstance();
         return view;
     }
 
     @Override
     public void onStart() {
         super.onStart();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        Log.d("------", "ReadingFragment onResume: ");
+        zhihuFragment = ZhiHu_Fragment.newInstance();
+        topFragment = Top_Fragment.newInstance();
+        tiyuFragment = Tiyu_Fragment.newInstance();
+        yuleFragment = Yule_Fragment.newInstance();
+        kejiFragment = Keji_Fragment.newInstance();
         readingViewPager.setAdapter(new FragmentPagerAdapter(getChildFragmentManager()) {
             @Override
             public Fragment getItem(int position) {
@@ -77,14 +82,14 @@ public class Reading_Fragment extends Fragment {
                     case 0:
                         return zhihuFragment;
                     case 1:
-                        return androidFragment;
+                        return topFragment;
                     case 2:
-                        return iosFragment;
+                        return tiyuFragment;
                     case 3:
-                        return frontFragment;
+                        return yuleFragment;
                     case 4:
-                        return jokerFragment;
-                        default:
+                        return kejiFragment;
+                    default:
                 }
                 return null;
             }
@@ -94,7 +99,26 @@ public class Reading_Fragment extends Fragment {
                 return 5;
             }
         });
-        readingViewPager.setOffscreenPageLimit(1);
+        readingViewPager.setOffscreenPageLimit(5);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        Log.i("------", "readingFragment onStop: ");
+    }
+
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        Log.i("------", "readingFragment onDestroyView: ");
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Log.i("------", "readingFragment onDestroy: ");
     }
 
     private ViewPager.OnPageChangeListener mOnPageChangeListener = new ViewPager.OnPageChangeListener() {

@@ -1,5 +1,6 @@
 package com.example.bibingwei.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -7,13 +8,17 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MenuItem;
+import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.bibingwei.view.fragments.Luck_Fragment;
 import com.example.bibingwei.view.fragments.Music_Fragment;
 import com.example.bibingwei.view.fragments.Reading_Fragment;
 import com.example.bibingwei.view.fragments.Video_Fragment;
+
+import java.util.Objects;
 
 import qiu.niorgai.StatusBarCompat;
 
@@ -32,6 +37,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Log.i("------", "mainActivity onCreate: ");
+
         //透明状态栏
         StatusBarCompat.translucentStatusBar(this);
         //SDK >= 21时, 取消状态栏的阴影
@@ -41,6 +48,11 @@ public class MainActivity extends AppCompatActivity {
         mViewPager.addOnPageChangeListener(mOnPageChangeListener);
         navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
         readingFragment = Reading_Fragment.newInstance();
         luckFragment = Luck_Fragment.newInstance();
         musicFragment = Music_Fragment.newInstance();
@@ -50,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+
         mViewPager.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
             @Override
             public Fragment getItem(int position) {
@@ -71,17 +84,26 @@ public class MainActivity extends AppCompatActivity {
             public int getCount() {
                 return 4;
             }
-
-
         });
         //防止频繁的销毁视图
-        mViewPager.setOffscreenPageLimit(1);
+        mViewPager.setOffscreenPageLimit(4);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.i("------", "MainActivity onStop: ");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.i("------", "MainActivity onDestroy: ");
     }
 
     private ViewPager.OnPageChangeListener mOnPageChangeListener = new ViewPager.OnPageChangeListener() {
         @Override
         public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
         }
 
         @Override
@@ -94,7 +116,6 @@ public class MainActivity extends AppCompatActivity {
         public void onPageScrollStateChanged(int state) {
 
         }
-
     };
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -103,7 +124,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             mViewPager.setCurrentItem(item.getOrder());
-            return true;
+            return false;
         }
     };
 }

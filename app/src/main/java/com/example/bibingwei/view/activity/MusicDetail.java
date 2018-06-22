@@ -160,6 +160,7 @@ public class MusicDetail extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         EventBus.getDefault().unregister(this);
+        MusicDetail.this.finish();
     }
 
     @Subscribe(sticky = true,threadMode = ThreadMode.MAIN)

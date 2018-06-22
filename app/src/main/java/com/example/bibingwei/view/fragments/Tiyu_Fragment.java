@@ -10,6 +10,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,10 +18,12 @@ import android.widget.Toast;
 
 import com.example.bibingwei.view.R;
 import com.example.bibingwei.view.activity.Reading_NewDetail;
+import com.example.bibingwei.view.activity.VideoDetail;
 import com.example.bibingwei.view.adapter.ReadingOtherAdapter;
 import com.example.bibingwei.bean.OtherReading;
 import com.example.bibingwei.network.Network;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -42,7 +45,7 @@ public class Tiyu_Fragment extends Fragment {
     @BindView(R.id.readingSwipeRefreshLayout)SwipeRefreshLayout mSwipeRefreshLayout;
 
     private ReadingOtherAdapter mReadingOtherAdapter = new ReadingOtherAdapter();
-    private List<OtherReading.ResultBean.DataBean> mDataBeans;
+    private List<OtherReading.ResultBean.DataBean> mDataBeans = new ArrayList<>();
     private Map<String, String> params = new HashMap<>();
     private String newsDetail;
 
