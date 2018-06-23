@@ -48,8 +48,6 @@ public class Reading_Fragment extends Fragment {
         View view =  inflater.inflate(R.layout.fragment_reading, container, false);
         ButterKnife.bind(this,view);
         readingViewPager = view.findViewById(R.id.reading_viewPager);
-        readingViewPager.addOnPageChangeListener(mOnPageChangeListener);
-        mBottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         return view;
     }
 
@@ -118,5 +116,8 @@ public class Reading_Fragment extends Fragment {
 
             }
         };
+
+        readingViewPager.addOnPageChangeListener(mOnPageChangeListener);
+        mBottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
     }
 }

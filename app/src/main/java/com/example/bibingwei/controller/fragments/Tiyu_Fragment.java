@@ -63,6 +63,7 @@ public class Tiyu_Fragment extends Fragment {
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
         if (isVisibleToUser){
+            mSwipeRefreshLayout.setRefreshing(true);
             initData();
         }
     }

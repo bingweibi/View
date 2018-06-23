@@ -1,5 +1,6 @@
 package com.example.bibingwei.controller.fragments;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -12,12 +13,14 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.bibingwei.controller.R;
 import com.example.bibingwei.controller.activity.Reading_NewDetail;
 import com.example.bibingwei.controller.adapter.ReadingOtherAdapter;
 import com.example.bibingwei.bean.OtherReading;
 import com.example.bibingwei.model.LoadData;
+import com.example.bibingwei.model.network.Network;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -26,6 +29,9 @@ import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -59,11 +65,8 @@ public class Keji_Fragment extends Fragment {
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
         if (isVisibleToUser){
-            mSwipeRefreshLayout.setRefreshing(false);
-            mDataBeans = LoadData.initData(params,mContext);
-            if (mDataBeans.size() > 0){
-                mSwipeRefreshLayout.setRefreshing(false);
-            }
+            mSwipeRefreshLayout.setRefreshing(true);
+            initData();
         }
     }
 
@@ -102,11 +105,30 @@ public class Keji_Fragment extends Fragment {
             @Override
             public void onRefresh() {
                 mSwipeRefreshLayout.setRefreshing(true);
-                mDataBeans = LoadData.initData(params,mContext);
-                if (mDataBeans.size() > 0){
-                    mSwipeRefreshLayout.setRefreshing(false);
-                }
+                initData();
             }
         });
+    }
+
+    @SuppressLint("CheckResult")
+    private void initData(){
+        Network.getOtherApi()
+                .getData(params)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<OtherReading>() {
+                    @Override
+                    public void accept(OtherReading otherReading) {
+                        mSwipeRefreshLayout.setRefreshing(false);
+                        mDataBeans = otherReading.getResult().getData();
+                        mReadingOtherAdapter.setData(mDataBeans);
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable)  {
+                        mSwipeRefreshLayout.setRefreshing(false);
+                        Toast.makeText(getContext(),"今天的使用次数已用完...",Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 }

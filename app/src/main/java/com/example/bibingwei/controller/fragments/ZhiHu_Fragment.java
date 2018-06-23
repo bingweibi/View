@@ -51,14 +51,6 @@ public class ZhiHu_Fragment extends Fragment {
     }
 
     @Override
-    public void setUserVisibleHint(boolean isVisibleToUser) {
-        super.setUserVisibleHint(isVisibleToUser);
-        if (isVisibleToUser){
-            initData();
-        }
-    }
-
-    @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View mView = inflater.inflate(R.layout.fragment_zhihu_fragment, container, false);
@@ -72,6 +64,7 @@ public class ZhiHu_Fragment extends Fragment {
         mSwipeRefreshLayout.setSize(SwipeRefreshLayout.LARGE);
         if (mStoriesBeanList == null){
             mSwipeRefreshLayout.setRefreshing(true);
+            initData();
         }
         return mView;
     }
