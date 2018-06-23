@@ -5,6 +5,7 @@ import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -161,6 +162,15 @@ public class MusicDetail extends AppCompatActivity {
         super.onDestroy();
         EventBus.getDefault().unregister(this);
         MusicDetail.this.finish();
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0){
+            setResult(2);
+            finish();
+        }
+        return false;
     }
 
     @Subscribe(sticky = true,threadMode = ThreadMode.MAIN)

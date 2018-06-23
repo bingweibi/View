@@ -28,6 +28,7 @@ import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -113,7 +114,7 @@ public class Video_Fragment extends Fragment {
             public void onClick(View view, int position) {
 
                 EventBus.getDefault().postSticky(new VideoEvent(mVideoList));
-                getActivity().startActivityForResult(new Intent(getActivity(),VideoDetail.class).putExtra("position",position),3);
+                Objects.requireNonNull(getActivity()).startActivityForResult(new Intent(getActivity(),VideoDetail.class).putExtra("position",position),3);
             }
         });
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {

@@ -23,6 +23,7 @@ import com.bumptech.glide.Glide;
 import com.example.bibingwei.view.activity.MusicDetail;
 import com.example.bibingwei.event.MusicEvent;
 import com.example.bibingwei.view.R;
+import com.example.bibingwei.view.activity.VideoDetail;
 import com.example.bibingwei.view.adapter.MusicListAdapter;
 import com.example.bibingwei.bean.Music;
 import com.example.bibingwei.bean.MusicPlay;
@@ -194,9 +195,9 @@ public class Music_Fragment extends Fragment {
             @Override
             public void onClick(View v) {
                 EventBus.getDefault().postSticky(new MusicEvent(musicList));
-                startActivity(new Intent(getContext(), MusicDetail.class)
+                Objects.requireNonNull(getActivity()).startActivityForResult(new Intent(getContext(), MusicDetail.class)
                         .putExtra("position",musicPosition)
-                        .putExtra("playPosition",musicCurrentPlayPosition));
+                        .putExtra("playPosition",musicCurrentPlayPosition),2);
             }
         });
     }

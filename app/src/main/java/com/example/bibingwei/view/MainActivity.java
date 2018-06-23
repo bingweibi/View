@@ -70,6 +70,8 @@ public class MainActivity extends AppCompatActivity {
         if (requestCode == 3 && resultCode == 3){
             Log.i("------", "CurrentItem: " + mViewPager.getCurrentItem());
             temp = 3;
+        }else if (requestCode == 2 && resultCode == 2){
+            temp=2;
         }
     }
 
