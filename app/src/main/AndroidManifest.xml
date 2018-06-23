@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.bibingwei.view">
+    package="com.example.bibingwei.controller">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
+            android:name="com.example.bibingwei.controller.MainActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,11 +20,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.ZhihuDailyDetail" />
-        <activity android:name=".activity.Reading_NewDetail" />
-        <activity android:name=".activity.MusicDetail" />
+        <activity android:name="com.example.bibingwei.controller.activity.ZhihuDailyDetail" />
+        <activity android:name="com.example.bibingwei.controller.activity.Reading_NewDetail" />
+        <activity android:name="com.example.bibingwei.controller.activity.MusicDetail" />
         <activity
-            android:name=".activity.VideoDetail"
+            android:name="com.example.bibingwei.controller.activity.VideoDetail"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_video_detail"
             android:theme="@style/FullscreenTheme"/>
