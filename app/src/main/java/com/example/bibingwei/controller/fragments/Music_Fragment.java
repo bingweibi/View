@@ -59,7 +59,7 @@ public class Music_Fragment extends Fragment {
     @BindView(R.id.nextSong)ImageView nextSong;
     @BindView(R.id.swipeRefreshLayout) SwipeRefreshLayout mSwipeRefreshLayout;
 
-    private List<Music.SongListBean> musicList = new ArrayList<>();
+    private List<Music.SongListBean> musicList;
     private MusicListAdapter mMusicListAdapter = new MusicListAdapter();
     private MediaPlayer mMediaPlayer = new MediaPlayer();
     private String musicPlayUrl;
@@ -83,7 +83,8 @@ public class Music_Fragment extends Fragment {
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
-        if (isVisibleToUser){
+        if (isVisibleToUser && musicList == null){
+            mSwipeRefreshLayout.setRefreshing(true);
             initData();
         }
     }
@@ -101,9 +102,6 @@ public class Music_Fragment extends Fragment {
         mSwipeRefreshLayout.setDistanceToTriggerSync(250);
         mSwipeRefreshLayout.setProgressBackgroundColorSchemeColor(Color.WHITE);
         mSwipeRefreshLayout.setSize(SwipeRefreshLayout.LARGE);
-        if (musicList == null){
-            mSwipeRefreshLayout.setRefreshing(true);
-        }
         return mView;
     }
 

@@ -96,6 +96,7 @@ public class ZhiHu_Fragment extends Fragment {
                 super.onScrollStateChanged(recyclerView, newState);
 
                 if (! mRecyclerView.canScrollVertically(1)){
+                    Log.i("------", "onScrollStateChanged: " + mRecyclerView.canScrollHorizontally(1));
                     oldDate = new GetDateUtil().getDate(beforeDate);
                     --beforeDate;
                     getOldData();

@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.title) TextView titleView;
     private FragmentPagerAdapter mPagerAdapter;
     private ViewPager.OnPageChangeListener mOnPageChangeListener;
+    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener;
     private int temp = 0;
 
     @Override
@@ -49,8 +50,6 @@ public class MainActivity extends AppCompatActivity {
         StatusBarCompat.translucentStatusBar(this);
         //SDK >= 21时, 取消状态栏的阴影
         StatusBarCompat.translucentStatusBar(this,false);
-        mViewPager.addOnPageChangeListener(mOnPageChangeListener);
-        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
     }
 
     @Override
@@ -126,15 +125,17 @@ public class MainActivity extends AppCompatActivity {
 
             }
         };
+
+        mOnNavigationItemSelectedListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
+
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                mViewPager.setCurrentItem(item.getOrder());
+                return true;
+            }
+        };
+
+        mViewPager.addOnPageChangeListener(mOnPageChangeListener);
+        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
     }
-
-    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-            = new BottomNavigationView.OnNavigationItemSelectedListener() {
-
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            mViewPager.setCurrentItem(item.getOrder());
-            return true;
-        }
-    };
 }

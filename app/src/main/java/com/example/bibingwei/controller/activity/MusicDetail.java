@@ -63,7 +63,7 @@ public class MusicDetail extends AppCompatActivity {
     private MediaPlayer mMediaPlayer = new MediaPlayer();
     private Map<String,String> params = new HashMap<>();
     private String musicPlayUrl;
-    //private lyricfile
+    private String musicWordUrl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -190,6 +190,7 @@ public class MusicDetail extends AppCompatActivity {
                         musicPlayUrl = musicPlay.getBitrate().getShow_link();
                         musicName.setText(musicPlay.getSonginfo().getTitle());
                         musicAuthor.setText(musicPlay.getSonginfo().getAuthor());
+                        musicWordUrl = musicPlay.getSonginfo().getLrclink();
                         Glide.with(MusicDetail.this).load(musicPlay.getSonginfo().getPic_big())
                                 .apply(new RequestOptions().override(MusicDetail.this.getResources().getDisplayMetrics().widthPixels,MusicDetail.this.getResources().getDisplayMetrics().heightPixels))
                                 .into(musicDetailPic);

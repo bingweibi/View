@@ -5,6 +5,8 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,11 +36,10 @@ import io.reactivex.schedulers.Schedulers;
  */
 public class Luck_Fragment extends Fragment {
 
-    @BindView(R.id.luck_image_recyclerView)
-    DiscreteScrollView mDiscreteScrollView;
+    @BindView(R.id.luck_image_recyclerView) DiscreteScrollView mDiscreteScrollView;
 
     private LuckImageAdapter mLuckImageAdapter = new LuckImageAdapter();
-    private List<LuckImage.ResultsBean> mResultsBeanList = new ArrayList<>();
+    private List<LuckImage.ResultsBean> mResultsBeanList;
     private int num = 1;
 
     public Luck_Fragment() {
@@ -53,7 +54,7 @@ public class Luck_Fragment extends Fragment {
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
-        if (isVisibleToUser){
+        if (isVisibleToUser && mResultsBeanList == null){
             initData(num);
         }
     }
